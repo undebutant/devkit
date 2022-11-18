@@ -3,11 +3,6 @@
 Script and Ansible roles to provision a convenient Ubuntu devkit on WSL2 :)
 
 
-## Table of contents
-
-[[_TOC_]]
-
-
 ## What's inside
 
 | Software             | Ansible variable               | Default version                 |
