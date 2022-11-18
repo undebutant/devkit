@@ -1,0 +1,41 @@
+---
+- name: Check mongodb shell install
+  stat:
+    path: '/usr/local/bin/mongosh'
+  register: mongodb_shell_bin
+
+- name: Check mongodb shell installed version
+  shell:
+    cmd: mongosh --version | sed -n -e 's/\(.*\)/\1/p'
+  register: mongodb_shell_installed_version
+  when: mongodb_shell_bin.stat.exists
+  changed_when: false
+
+- name: Create a temporary directory to extract mongodb shell archive
+  file:
+    path: '/tmp/mongodb-shell-linux-amd64'
+    state: directory
+    mode: '0755'
+  when: not mongodb_shell_bin.stat.exists or mongodb_shell_installed_version.stdout != mongodb_shell_version
+
+- name: Extract mongodb shell archive
+  unarchive:
+    src: "https://downloads.mongodb.com/compass/mongosh-{{ mongodb_shell_version }}-linux-x64.tgz"
+    remote_src: yes
+    dest: '/tmp/mongodb-shell-linux-amd64/'
+    mode: '0755'
+  when: not mongodb_shell_bin.stat.exists or mongodb_shell_installed_version.stdout != mongodb_shell_version
+
+- name: Copy mongodb shell binary
+  copy:
+    src: "/tmp/mongodb-shell-linux-amd64/mongosh-{{ mongodb_shell_version }}-linux-x64/bin/mongosh"
+    remote_src: yes
+    dest: '/usr/local/bin/mongosh'
+    mode: '0755'
+  when: not mongodb_shell_bin.stat.exists or mongodb_shell_installed_version.stdout != mongodb_shell_version
+
+- name: Remove mongodb shell folder from /tmp
+  file:
+    path: '/tmp/mongodb-shell-linux-amd64'
+    state: absent
+  when: not mongodb_shell_bin.stat.exists or mongodb_shell_installed_version.stdout != mongodb_shell_version

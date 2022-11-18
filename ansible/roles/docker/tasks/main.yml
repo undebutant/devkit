@@ -1,0 +1,71 @@
+---
+- name: Create docker group
+  group:
+    name: docker
+    state: present
+
+- name: Add the user to docker group
+  user:
+    name: "{{ ubuntu_user }}"
+    groups: docker
+    append: yes
+
+- name: Add docker gpg key to trusted keys
+  apt_key:
+    id: '9DC858229FC7DD38854AE2D88D81803C0EBFCD88'
+    url: 'https://download.docker.com/linux/ubuntu/gpg'
+    keyring: '/etc/apt/trusted.gpg.d/docker.gpg'
+    state: present
+
+- name: Add docker apt-repository
+  apt_repository:
+    repo: 'deb [arch=amd64] https://download.docker.com/linux/ubuntu jammy stable'
+    state: present
+    mode: '0644'
+    update_cache: yes
+
+- name: Install docker packages
+  apt:
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+    state: present
+
+- name: Enable docker service
+  systemd:
+    name: docker
+    enabled: yes
+    masked: no
+
+- name: Make sure /etc/docker folder exists
+  file:
+    path: '/etc/docker'
+    state: directory
+    mode: '0755'
+
+- name: Copy docker daemon config
+  copy:
+    src: 'daemon.json'
+    dest: '/etc/docker/daemon.json'
+    mode: '0600'
+
+- name: Create docker daemon logs folder
+  file:
+    path: "/home/{{ ubuntu_user }}/.docker"
+    state: directory
+    mode: '0755'
+    owner: "{{ ubuntu_user }}"
+    group: "{{ ubuntu_user }}"
+
+- name: Create docker cli-plugins folder
+  file:
+    path: '/usr/local/lib/docker/cli-plugins'
+    state: directory
+    mode: '0755'
+
+- name: Install docker-compose binary
+  get_url:
+    url: "https://github.com/docker/compose/releases/download/v{{ docker_compose_version }}/docker-compose-linux-x86_64"
+    dest: '/usr/local/lib/docker/cli-plugins/docker-compose'
+    mode: '0755'

@@ -1,0 +1,99 @@
+---
+- name: Check terraform install
+  stat:
+    path: '/usr/local/bin/terraform'
+  register: terraform_bin
+
+- name: Check terraform installed version
+  shell:
+    cmd: terraform version | sed -n -e 's/Terraform v\(.*\)$/\1/p'
+  register: terraform_installed_version
+  when: terraform_bin.stat.exists
+  changed_when: false
+
+- name: Unzip terraform archive
+  unarchive:
+    src: "https://releases.hashicorp.com/terraform/{{ terraform_version }}/terraform_{{ terraform_version }}_linux_amd64.zip"
+    remote_src: yes
+    dest: '/usr/local/bin/'
+    mode: '0755'
+  when: not terraform_bin.stat.exists or terraform_installed_version.stdout != terraform_version
+
+- name: Check terraform-docs install
+  stat:
+    path: '/usr/local/bin/terraform-docs'
+  register: terraform_docs_bin
+
+- name: Check terraform-docs installed version
+  shell:
+    cmd: terraform-docs version | sed -n -e 's/terraform-docs version v\([0-9\.]*\).*$/\1/p'
+  register: terraform_docs_installed_version
+  when: terraform_docs_bin.stat.exists
+  changed_when: false
+
+- name: Create a temporary directory to extract terraform-docs archive
+  file:
+    path: '/tmp/terraform-docs-linux-amd64'
+    state: directory
+    mode: '0755'
+  when: not terraform_docs_bin.stat.exists or terraform_docs_installed_version.stdout != terraform_docs_version
+
+- name: Extract terraform-docs archive
+  unarchive:
+    src: "https://github.com/terraform-docs/terraform-docs/releases/download/v{{ terraform_docs_version }}/terraform-docs-v{{ terraform_docs_version }}-linux-amd64.tar.gz"
+    remote_src: yes
+    dest: '/tmp/terraform-docs-linux-amd64/'
+    mode: '0755'
+  when: not terraform_docs_bin.stat.exists or terraform_docs_installed_version.stdout != terraform_docs_version
+
+- name: Copy terraform-docs binary
+  copy:
+    src: '/tmp/terraform-docs-linux-amd64/terraform-docs'
+    remote_src: yes
+    dest: '/usr/local/bin/terraform-docs'
+    mode: '0755'
+  when: not terraform_docs_bin.stat.exists or terraform_docs_installed_version.stdout != terraform_docs_version
+
+- name: Remove terraform-docs folder from /tmp
+  file:
+    path: '/tmp/terraform-docs-linux-amd64'
+    state: absent
+  when: not terraform_docs_bin.stat.exists or terraform_docs_installed_version.stdout != terraform_docs_version
+
+- name: Check terragrunt install
+  stat:
+    path: '/usr/local/bin/terragrunt'
+  register: terragrunt_bin
+
+- name: Check terragrunt installed version
+  shell:
+    cmd: terragrunt -v | sed -n -e 's/terragrunt version v\(.*\)$/\1/p'
+  register: terragrunt_installed_version
+  when: terragrunt_bin.stat.exists
+  changed_when: false
+
+- name: Install terragrunt
+  get_url:
+    url: "https://github.com/gruntwork-io/terragrunt/releases/download/v{{ terragrunt_version }}/terragrunt_linux_amd64"
+    dest: '/usr/local/bin/terragrunt'
+    mode: '0755'
+    force: yes
+  when: not terragrunt_bin.stat.exists or terragrunt_installed_version.stdout != terragrunt_version
+
+- name: Create cache plugin folder for terraform
+  file:
+    path: "/home/{{ ubuntu_user }}/.terraform.d/plugin-cache"
+    state: directory
+    mode: '0755'
+    recurse: yes
+    owner: "{{ ubuntu_user }}"
+    group: "{{ ubuntu_user }}"
+
+# Create a "provider plugin cache" => https://www.terraform.io/docs/commands/cli-config.html#provider-plugin-cache
+- name: Copy terraform CLI config file
+  copy:
+    src: '.terraformrc'
+    dest: "/home/{{ ubuntu_user }}/.terraformrc"
+    mode: '0755'
+    owner: "{{ ubuntu_user }}"
+    group: "{{ ubuntu_user }}"

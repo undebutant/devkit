@@ -1,0 +1,46 @@
+---
+- name: Install aptitude
+  apt:
+    name: aptitude
+    state: present
+
+# Workaround for Let's Encrypt root certificate expiration
+# https://scotthelme.co.uk/lets-encrypt-old-root-expiration
+- name: Install latest ca-certificates package version
+  apt:
+    name: ca-certificates
+    state: latest
+
+- name: Install basic packages
+  apt:
+    name:
+      - apt-transport-https
+      # Install make and other useful compilation tools
+      - build-essential
+      - curl
+      - gnupg
+      - htop
+      - jq
+      # Package required for pip3
+      - python3-distutils
+      # Package required for ansible-lint
+      - python3-setuptools
+      - software-properties-common
+      # Allow ansible SSH connection using password
+      - sshpass
+      - unzip
+      - zip
+    state: present
+
+- name: NO COWS ALLOWED HERE (just like in Diablo :p)
+  copy:
+    src: 'ansible.sh'
+    dest: '/etc/profile.d/ansible.sh'
+    mode: '0644'
+
+- name: Set timezone to the one set in vars.yml
+  timezone:
+    name: "{{ user_timezone }}"
+
+- name: Activate timedatectl synchronisation
+  command: timedatectl set-ntp true

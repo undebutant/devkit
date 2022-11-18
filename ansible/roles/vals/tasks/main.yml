@@ -1,0 +1,41 @@
+---
+- name: Check vals install
+  stat:
+    path: '/usr/local/bin/vals'
+  register: vals_bin
+
+- name: Check vals installed version
+  shell:
+    cmd: 'vals version | sed -n -e "s/Version: v\([0-9\.]*\)-.*$/\1/p"'
+  register: vals_installed_version
+  when: vals_bin.stat.exists
+  changed_when: false
+
+- name: Create a temporary directory to extract vals archive
+  file:
+    path: '/tmp/vals-linux-amd64'
+    state: directory
+    mode: '0755'
+  when: not vals_bin.stat.exists or vals_installed_version.stdout != vals_version
+
+- name: Extract vals archive
+  unarchive:
+    src: "https://github.com/variantdev/vals/releases/download/v{{ vals_version }}/vals_{{ vals_version }}_linux_amd64.tar.gz"
+    remote_src: yes
+    dest: '/tmp/vals-linux-amd64/'
+    mode: '0755'
+  when: not vals_bin.stat.exists or vals_installed_version.stdout != vals_version
+
+- name: Copy vals binary
+  copy:
+    src: '/tmp/vals-linux-amd64/vals'
+    remote_src: yes
+    dest: '/usr/local/bin/vals'
+    mode: '0755'
+  when: not vals_bin.stat.exists or vals_installed_version.stdout != vals_version
+
+- name: Remove vals folder from /tmp
+  file:
+    path: '/tmp/vals-linux-amd64'
+    state: absent
+  when: not vals_bin.stat.exists or vals_installed_version.stdout != vals_version

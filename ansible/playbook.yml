@@ -1,0 +1,31 @@
+---
+- hosts: "*"
+  become: yes
+
+  pre_tasks:
+    - name: Include relevant variables
+      include_vars:
+        file: "./vars.yml"
+      tags:
+        - always
+
+  roles:
+    - { role: basics, tags: ['basics'] }
+    - { role: git, tags: ['git'] }
+    - { role: ansible_lint, tags: ['ansible-lint'] }
+    - { role: yq, tags: ['yq'] }
+    - { role: terraform, tags: ['terraform'] }
+    - { role: awscli, tags: ['awscli'] }
+    - { role: gcloud, tags: ['gcloud'] }
+    - { role: openstack, tags: ['openstack'] }
+    - { role: sops, tags: ['sops'] }
+    - { role: vault, tags: ['vault'] }
+    - { role: docker, tags: ['docker'] }
+    - { role: kubernetes, tags: ['kubernetes'] }
+    - { role: helm, tags: ['helm'] }
+    - { role: vals, tags: ['vals'] }
+    - { role: go, tags: ['go'] }
+    - { role: java, tags: ['java'] }
+    - { role: nodejs, tags: ['nodejs'] }
+    - { role: editorconfig, tags: ['editorconfig'] }
+    - { role: mongodb, tags: ['mongodb'] }

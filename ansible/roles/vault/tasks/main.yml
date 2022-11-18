@@ -1,0 +1,20 @@
+---
+- name: Check vault install
+  stat:
+    path: '/usr/local/bin/vault'
+  register: vault_bin
+
+- name: Check vault installed version
+  shell:
+    cmd: vault version | sed -n -e 's/Vault v\([0-9\.]*\) .*$/\1/p'
+  register: vault_installed_version
+  when: vault_bin.stat.exists
+  changed_when: false
+
+- name: Unzip vault archive
+  unarchive:
+    src: "https://releases.hashicorp.com/vault/{{ vault_version }}/vault_{{ vault_version }}_linux_amd64.zip"
+    remote_src: yes
+    dest: '/usr/local/bin/'
+    mode: '0755'
+  when: not vault_bin.stat.exists or vault_installed_version.stdout != vault_version

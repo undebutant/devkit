@@ -1,0 +1,107 @@
+---
+- name: Check helm install
+  stat:
+    path: '/usr/local/bin/helm'
+  register: helm_bin
+
+- name: Check helm installed version
+  shell:
+    cmd: helm version | sed -n -e 's/version\.BuildInfo{Version:\"v\([0-9\.]*\)\".*$/\1/p'
+  register: helm_installed_version
+  when: helm_bin.stat.exists
+  changed_when: false
+
+- name: Create a temporary directory to extract helm archive
+  file:
+    path: '/tmp/helm-linux-amd64'
+    state: directory
+    mode: '0755'
+  when: not helm_bin.stat.exists or helm_installed_version.stdout != helm_version
+
+- name: Extract helm archive
+  unarchive:
+    src: "https://get.helm.sh/helm-v{{ helm_version }}-linux-amd64.tar.gz"
+    remote_src: yes
+    dest: '/tmp/helm-linux-amd64/'
+    mode: '0755'
+  when: not helm_bin.stat.exists or helm_installed_version.stdout != helm_version
+
+- name: Copy helm binary
+  copy:
+    src: '/tmp/helm-linux-amd64/linux-amd64/helm'
+    remote_src: yes
+    dest: '/usr/local/bin/helm'
+    mode: '0755'
+  when: not helm_bin.stat.exists or helm_installed_version.stdout != helm_version
+
+- name: Remove helm folder from /tmp
+  file:
+    path: '/tmp/helm-linux-amd64'
+    state: absent
+  when: not helm_bin.stat.exists or helm_installed_version.stdout != helm_version
+
+
+- name: Check helmfile install
+  stat:
+    path: '/usr/local/bin/helmfile'
+  register: helmfile_bin
+
+- name: Check helmfile installed version
+  shell:
+    cmd: helmfile version | sed -n -e 's/ *Version *\([0-9\.]*\)$/\1/p'
+  register: helmfile_installed_version
+  when: helmfile_bin.stat.exists
+  changed_when: false
+
+- name: Create a temporary directory to extract helmfile archive
+  file:
+    path: '/tmp/helmfile-linux-amd64'
+    state: directory
+    mode: '0755'
+  when: not helmfile_bin.stat.exists or helmfile_installed_version.stdout != helmfile_version
+
+- name: Extract helmfile archive
+  unarchive:
+    src: "https://github.com/helmfile/helmfile/releases/download/v{{ helmfile_version }}/helmfile_{{ helmfile_version }}_linux_amd64.tar.gz"
+    remote_src: yes
+    dest: '/tmp/helmfile-linux-amd64/'
+    mode: '0755'
+  when: not helmfile_bin.stat.exists or helmfile_installed_version.stdout != helmfile_version
+
+- name: Copy helmfile binary
+  copy:
+    src: '/tmp/helmfile-linux-amd64/helmfile'
+    remote_src: yes
+    dest: '/usr/local/bin/helmfile'
+    mode: '0755'
+  when: not helmfile_bin.stat.exists or helmfile_installed_version.stdout != helmfile_version
+
+- name: Remove helmfile folder from /tmp
+  file:
+    path: '/tmp/helmfile-linux-amd64'
+    state: absent
+  when: not helmfile_bin.stat.exists or helmfile_installed_version.stdout != helmfile_version
+
+
+- name: Check helm diff plugin install
+  stat:
+    path: '/home/{{ ubuntu_user }}/.local/share/helm/plugins/helm-diff'
+  register: helm_diff_folder
+
+- name: Check helm diff plugin installed version
+  shell:
+    cmd: helm diff version
+  register: helm_diff_installed_version
+  become: no
+  when: helm_diff_folder.stat.exists
+  changed_when: false
+
+- name: Remove older helm diff plugin
+  command: 'helm plugin uninstall diff'
+  become: no
+  when: helm_diff_folder.stat.exists and helm_diff_installed_version.stdout != helm_diff_version
+
+- name: Install helm diff plugin
+  command: 'helm plugin install https://github.com/databus23/helm-diff --version {{ helm_diff_version }}'
+  become: no
+  when: not helm_diff_folder.stat.exists or helm_diff_installed_version.stdout != helm_diff_version

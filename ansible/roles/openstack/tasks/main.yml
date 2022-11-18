@@ -1,0 +1,6 @@
+---
+- name: Install openstack client
+  pip:
+    name: python-openstackclient
+    version: "{{ openstack_client_version }}"
+    executable: pip3

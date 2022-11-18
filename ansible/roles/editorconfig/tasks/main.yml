@@ -1,0 +1,41 @@
+---
+- name: Check editorconfig-checker install
+  stat:
+    path: '/usr/local/bin/ec-check'
+  register: editorconfig_checker_bin
+
+- name: Check editorconfig-checker installed version
+  shell:
+    cmd: ec-check -version
+  register: editorconfig_checker_installed_version
+  when: editorconfig_checker_bin.stat.exists
+  changed_when: false
+
+- name: Create a temporary directory to extract editorconfig-checker archive
+  file:
+    path: '/tmp/editorconfig-checker-linux-amd64'
+    state: directory
+    mode: '0755'
+  when: not editorconfig_checker_bin.stat.exists or editorconfig_checker_installed_version.stdout != editorconfig_checker_version
+
+- name: Extract editorconfig-checker archive
+  unarchive:
+    src: "https://github.com/editorconfig-checker/editorconfig-checker/releases/download/{{ editorconfig_checker_version }}/ec-linux-amd64.tar.gz"
+    remote_src: yes
+    dest: '/tmp/editorconfig-checker-linux-amd64/'
+    mode: '0755'
+  when: not editorconfig_checker_bin.stat.exists or editorconfig_checker_installed_version.stdout != editorconfig_checker_version
+
+- name: Copy editorconfig-checker binary
+  copy:
+    src: '/tmp/editorconfig-checker-linux-amd64/bin/ec-linux-amd64'
+    remote_src: yes
+    dest: '/usr/local/bin/ec-check'
+    mode: '0755'
+  when: not editorconfig_checker_bin.stat.exists or editorconfig_checker_installed_version.stdout != editorconfig_checker_version
+
+- name: Remove editorconfig-checker folder from /tmp
+  file:
+    path: '/tmp/editorconfig-checker-linux-amd64'
+    state: absent
+  when: not editorconfig_checker_bin.stat.exists or editorconfig_checker_installed_version.stdout != editorconfig_checker_version

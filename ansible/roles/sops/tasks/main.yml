@@ -1,0 +1,20 @@
+---
+- name: Check sops install
+  stat:
+    path: '/usr/local/bin/sops'
+  register: sops_bin
+
+- name: Check sops installed version
+  shell:
+    cmd: sops -v | sed -n -e 's/sops \(.*\) .*$/\1/p'
+  register: sops_installed_version
+  when: sops_bin.stat.exists
+  changed_when: false
+
+- name: Install sops
+  get_url:
+    url: "https://github.com/mozilla/sops/releases/download/v{{ sops_version }}/sops-v{{ sops_version }}.linux"
+    dest: '/usr/local/bin/sops'
+    mode: '0755'
+    force: yes
+  when: not sops_bin.stat.exists or (sops_installed_version.stdout != sops_version)

@@ -1,0 +1,61 @@
+---
+- name: Check gcloud install
+  stat:
+    path: '/opt/google-cloud-sdk/bin/gcloud'
+  register: gcloud_bin
+
+- name: Check gcloud installed version
+  shell:
+    cmd: gcloud version | sed -n -e 's/Google Cloud SDK \([0-9\.]*\)$/\1/p'
+  register: gcloud_installed_version
+  when: gcloud_bin.stat.exists
+  changed_when: false
+
+- name: Remove gcloud previous installation
+  file:
+    path: '/opt/google-cloud-sdk'
+    state: absent
+  when: gcloud_bin.stat.exists and (gcloud_installed_version.stdout != gcloud_version)
+
+- name: Download and unzip gcloud installer archive
+  unarchive:
+    src: "https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-{{ gcloud_version }}-linux-x86_64.tar.gz"
+    remote_src: yes
+    dest: '/opt'
+    mode: '0755'
+  when: not gcloud_bin.stat.exists or (gcloud_installed_version.stdout != gcloud_version)
+
+- name: Run gcloud installer
+  command: '/opt/google-cloud-sdk/install.sh --usage-reporting false --quiet'
+  when: not gcloud_bin.stat.exists or (gcloud_installed_version.stdout != gcloud_version)
+
+- name: Symlink gcloud binary
+  file:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    state: link
+    force: yes
+  loop:
+    - { src: '/opt/google-cloud-sdk/bin/anthoscli', dest: '/usr/local/bin/anthoscli' }
+    - { src: '/opt/google-cloud-sdk/bin/bq', dest: '/usr/local/bin/bq' }
+    - { src: '/opt/google-cloud-sdk/bin/gcloud', dest: '/usr/local/bin/gcloud' }
+    - { src: '/opt/google-cloud-sdk/bin/gsutil', dest: '/usr/local/bin/gsutil' }
+
+- name: Check gke-gcloud-auth-plugin install
+  stat:
+    path: '/opt/google-cloud-sdk/bin/gke-gcloud-auth-plugin'
+  register: gke_gcloud_auth_plugin_bin
+
+- name: Install gke-gcloud-auth-plugin in gcloud
+  shell:
+    cmd: gcloud components install gke-gcloud-auth-plugin
+  when: not gke_gcloud_auth_plugin_bin.stat.exists
+
+- name: Symlink gcloud binary plugins
+  file:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    state: link
+    force: yes
+  loop:
+    - { src: '/opt/google-cloud-sdk/bin/gke-gcloud-auth-plugin', dest: '/usr/local/bin/gke-gcloud-auth-plugin' }

@@ -1,0 +1,40 @@
+---
+- name: Check awscli install
+  stat:
+    path: '/usr/local/bin/aws'
+  register: awscli_bin
+
+- name: Check awscli installed version
+  shell:
+    cmd: aws --version | sed -n -e 's/aws-cli\/\(.*\) Python.*$/\1/p'
+  register: awscli_installed_version
+  when: awscli_bin.stat.exists
+  changed_when: false
+
+- name: Remove awscli v2 previous installation
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - '/usr/local/bin/aws'
+    - '/usr/local/bin/aws_completer'
+    - '/usr/local/aws-cli'
+  when: awscli_bin.stat.exists and (awscli_installed_version.stdout != awscli_version)
+
+- name: Download and unzip awscli v2 installer archive
+  unarchive:
+    src: "https://awscli.amazonaws.com/awscli-exe-linux-x86_64-{{ awscli_version }}.zip"
+    remote_src: yes
+    dest: '/tmp'
+    mode: '0755'
+  when: not awscli_bin.stat.exists or (awscli_installed_version.stdout != awscli_version)
+
+- name: Run awscli v2 installer
+  command: '/tmp/aws/install --install-dir /usr/local/aws-cli --bin-dir /usr/local/bin'
+  when: not awscli_bin.stat.exists or (awscli_installed_version.stdout != awscli_version)
+
+- name: Remove awscli v2 installer from /tmp
+  file:
+    path: "/tmp/aws"
+    state: absent
+  when: not awscli_bin.stat.exists or (awscli_installed_version.stdout != awscli_version)

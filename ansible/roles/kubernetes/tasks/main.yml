@@ -1,0 +1,20 @@
+---
+- name: Check kubectl install
+  stat:
+    path: '/usr/local/bin/kubectl'
+  register: kubectl_bin
+
+- name: Check kubectl installed version
+  shell:
+    cmd: 'kubectl version --client --output=yaml | grep gitVersion | sed -n -e "s/  gitVersion: v\([0-9\.]*\)$/\1/p"'
+  register: kubectl_installed_version
+  when: kubectl_bin.stat.exists
+  changed_when: false
+
+- name: Install kubectl
+  get_url:
+    url: "https://dl.k8s.io/release/v{{ kubernetes_version }}/bin/linux/amd64/kubectl"
+    dest: '/usr/local/bin/kubectl'
+    mode: '0755'
+    force: yes
+  when: not kubectl_bin.stat.exists or (kubectl_installed_version.stdout != kubernetes_version)
