@@ -1,6 +1,7 @@
 # Unreleased
 
 - Remove unused roles
+- Change docker `bip` and `default-address-pools` config
 
 # v0.1.0
 
