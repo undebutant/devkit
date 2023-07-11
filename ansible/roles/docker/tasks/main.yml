@@ -11,15 +11,15 @@
     append: yes
 
 - name: Add docker gpg key to trusted keys
-  apt_key:
-    id: '9DC858229FC7DD38854AE2D88D81803C0EBFCD88'
+  get_url:
     url: 'https://download.docker.com/linux/ubuntu/gpg'
-    keyring: '/etc/apt/trusted.gpg.d/docker.gpg'
-    state: present
+    dest: '/etc/apt/trusted.gpg.d/docker.gpg'
+    mode: '0644'
+    force: yes
 
 - name: Add docker apt-repository
   apt_repository:
-    repo: 'deb [arch=amd64] https://download.docker.com/linux/ubuntu jammy stable'
+    repo: 'deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/docker.gpg] https://download.docker.com/linux/ubuntu jammy stable'
     state: present
     mode: '0644'
     update_cache: yes
@@ -69,3 +69,4 @@
     url: "https://github.com/docker/compose/releases/download/v{{ docker_compose_version }}/docker-compose-linux-x86_64"
     dest: '/usr/local/lib/docker/cli-plugins/docker-compose'
     mode: '0755'
+    force: yes
