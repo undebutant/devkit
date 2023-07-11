@@ -16,8 +16,6 @@
     - { role: yq, tags: ['yq'] }
     - { role: terraform, tags: ['terraform'] }
     - { role: awscli, tags: ['awscli'] }
-    - { role: gcloud, tags: ['gcloud'] }
-    - { role: openstack, tags: ['openstack'] }
     - { role: sops, tags: ['sops'] }
     - { role: vault, tags: ['vault'] }
     - { role: docker, tags: ['docker'] }
@@ -25,7 +23,4 @@
     - { role: helm, tags: ['helm'] }
     - { role: vals, tags: ['vals'] }
     - { role: go, tags: ['go'] }
-    - { role: java, tags: ['java'] }
-    - { role: nodejs, tags: ['nodejs'] }
     - { role: editorconfig, tags: ['editorconfig'] }
-    - { role: mongodb, tags: ['mongodb'] }

@@ -1,6 +1,6 @@
 # Unreleased
 
-- Nothing yet
+- Remove unused roles
 
 # v0.1.0
 

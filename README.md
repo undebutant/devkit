@@ -14,7 +14,6 @@ Script and Ansible roles to provision a convenient Ubuntu devkit on WSL2 :)
 | docker               | `n/a`                          | `latest` (PPA)                  |
 | docker-compose       | `docker_compose_version`       | `2.12.2`                        |
 | editorconfig-checker | `editorconfig_checker_version` | `2.6.0`                         |
-| gcloud               | `gcloud_version`               | `410.0.0`                       |
 | git                  | `n/a`                          | `latest` (PPA)                  |
 | git-lfs              | `n/a`                          | `latest` (PPA)                  |
 | gnupg                | `n/a`                          | `latest`                        |
@@ -22,13 +21,9 @@ Script and Ansible roles to provision a convenient Ubuntu devkit on WSL2 :)
 | helm                 | `helm_version`                 | `3.10.2`                        |
 | helm diff            | `helm_diff_version`            | `3.6.0`                         |
 | helmfile             | `helmfile_version`             | `0.148.1`                       |
-| java                 | `openjdk_version`              | `19`                            |
 | jq                   | `n/a`                          | `latest`                        |
 | kubectl              | `kubernetes_version`           | `1.25.4`                        |
 | make                 | `n/a`                          | `latest`                        |
-| mongodb shell        | `mongodb_shell_version`        | `1.6.0`                         |
-| nodejs               | `node_version`                 | `18`                            |
-| openstack client     | `openstack_client_version`     | `6.0.0`                         |
 | pip                  | `n/a`                          | `latest` (Python installer)     |
 | python               | `n/a`                          | `3.10.x` (Ubuntu 22.04 default) |
 | sops                 | `sops_version`                 | `3.7.3`                         |
