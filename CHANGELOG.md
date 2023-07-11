@@ -2,6 +2,7 @@
 
 - Remove unused roles
 - Change docker `bip` and `default-address-pools` config
+- Remove go packages install
 
 # v0.1.0
 

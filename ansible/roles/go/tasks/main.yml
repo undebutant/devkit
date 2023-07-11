@@ -26,7 +26,7 @@
   when: not go_bin.stat.exists or (go_installed_version.stdout != go_version)
 
 - name: Change permissions on go bin directory
-  ansible.builtin.file:
+  file:
     path: '/usr/local/go/bin'
     state: directory
     mode: '0777'
@@ -46,14 +46,3 @@
     src: 'go.sh'
     dest: '/etc/profile.d/go.sh'
     mode: '0644'
-
-- name: Install workspace packages for Visual Studio Code go extension
-  shell:
-    cmd: "/usr/local/go/bin/go install {{ item.package }}@{{ item.version }}"
-  loop:
-    - { package: 'golang.org/x/tools/gopls', version: 'latest' }
-    - { package: 'github.com/ramya-rao-a/go-outline', version: 'latest' }
-    - { package: 'github.com/go-delve/delve/cmd/dlv', version: 'latest' }
-    - { package: 'honnef.co/go/tools/cmd/staticcheck', version: 'latest' }
-  become: no
-  when: not go_bin.stat.exists or (go_installed_version.stdout != go_version)
