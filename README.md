@@ -22,6 +22,7 @@ Script and Ansible roles to provision a convenient Ubuntu devkit on WSL2 :)
 | helm diff            | `helm_diff_version`            | `3.6.0`                         |
 | helmfile             | `helmfile_version`             | `0.148.1`                       |
 | jq                   | `n/a`                          | `latest`                        |
+| k9s                  | `k9s_version`                  | `0.27.4`                        |
 | kubectl              | `kubernetes_version`           | `1.25.4`                        |
 | make                 | `n/a`                          | `latest`                        |
 | pip                  | `n/a`                          | `latest` (Python installer)     |

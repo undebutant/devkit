@@ -4,6 +4,7 @@
 - Change docker `bip` and `default-address-pools` config
 - Remove go packages install
 - Add velero binary
+- Add k9s binary
 
 # v0.1.0
 
