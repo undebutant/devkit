@@ -21,6 +21,7 @@
     - { role: docker, tags: ['docker'] }
     - { role: kubernetes, tags: ['kubernetes'] }
     - { role: helm, tags: ['helm'] }
+    - { role: velero, tags: ['velero'] }
     - { role: vals, tags: ['vals'] }
     - { role: go, tags: ['go'] }
     - { role: editorconfig, tags: ['editorconfig'] }

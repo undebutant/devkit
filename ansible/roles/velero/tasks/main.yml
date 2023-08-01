@@ -1,0 +1,42 @@
+---
+- name: Check velero install
+  stat:
+    path: '/usr/local/bin/velero'
+  register: velero_bin
+
+- name: Check velero installed version
+  shell:
+    cmd: |
+      velero version --client-only | sed -n -e 's/Version: v\(.*\)$/\1/p' | awk '{$1=$1};1'
+  register: velero_installed_version
+  when: velero_bin.stat.exists
+  changed_when: false
+
+- name: Create a temporary directory to extract velero archive
+  file:
+    path: '/tmp/velero-linux-amd64'
+    state: directory
+    mode: '0755'
+  when: not velero_bin.stat.exists or velero_installed_version.stdout != velero_version
+
+- name: Extract velero archive
+  unarchive:
+    src: "https://github.com/vmware-tanzu/velero/releases/download/v{{ velero_version }}/velero-v{{ velero_version }}-linux-amd64.tar.gz"
+    remote_src: yes
+    dest: '/tmp/velero-linux-amd64/'
+    mode: '0755'
+  when: not velero_bin.stat.exists or velero_installed_version.stdout != velero_version
+
+- name: Copy velero binary
+  copy:
+    src: "/tmp/velero-linux-amd64/velero-v{{ velero_version }}-linux-amd64/velero"
+    remote_src: yes
+    dest: '/usr/local/bin/velero'
+    mode: '0755'
+  when: not velero_bin.stat.exists or velero_installed_version.stdout != velero_version
+
+- name: Remove velero folder from /tmp
+  file:
+    path: '/tmp/velero-linux-amd64'
+    state: absent
+  when: not velero_bin.stat.exists or velero_installed_version.stdout != velero_version

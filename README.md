@@ -33,6 +33,7 @@ Script and Ansible roles to provision a convenient Ubuntu devkit on WSL2 :)
 | unzip                | `n/a`                          | `latest`                        |
 | vals                 | `vals_version`                 | `0.19.0`                        |
 | vault                | `vault_version`                | `1.12.1`                        |
+| velero               | `velero_version`               | `1.11.1`                        |
 | yq                   | `yq_version`                   | `4.30.4`                        |
 
 
