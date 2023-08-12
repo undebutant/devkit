@@ -5,6 +5,7 @@
 - Remove go packages install
 - Add velero binary
 - Add k9s binary
+- Add kubeseal binary
 
 # v0.1.0
 

@@ -1,0 +1,42 @@
+---
+- name: Check kubeseal install
+  stat:
+    path: '/usr/local/bin/kubeseal'
+  register: kubeseal_bin
+
+- name: Check kubeseal installed version
+  shell:
+    cmd: |
+      kubeseal --version | sed -n -e 's/kubeseal version: \(.*\)$/\1/p'
+  register: kubeseal_installed_version
+  when: kubeseal_bin.stat.exists
+  changed_when: false
+
+- name: Create a temporary directory to extract kubeseal archive
+  file:
+    path: '/tmp/kubeseal-linux-amd64'
+    state: directory
+    mode: '0755'
+  when: not kubeseal_bin.stat.exists or kubeseal_installed_version.stdout != kubeseal_version
+
+- name: Extract kubeseal archive
+  unarchive:
+    src: "https://github.com/bitnami-labs/sealed-secrets/releases/download/v{{ kubeseal_version }}/kubeseal-{{ kubeseal_version }}-linux-amd64.tar.gz"
+    remote_src: yes
+    dest: '/tmp/kubeseal-linux-amd64/'
+    mode: '0755'
+  when: not kubeseal_bin.stat.exists or kubeseal_installed_version.stdout != kubeseal_version
+
+- name: Copy kubeseal binary
+  copy:
+    src: "/tmp/kubeseal-linux-amd64/kubeseal"
+    remote_src: yes
+    dest: '/usr/local/bin/kubeseal'
+    mode: '0755'
+  when: not kubeseal_bin.stat.exists or kubeseal_installed_version.stdout != kubeseal_version
+
+- name: Remove kubeseal folder from /tmp
+  file:
+    path: '/tmp/kubeseal-linux-amd64'
+    state: absent
+  when: not kubeseal_bin.stat.exists or kubeseal_installed_version.stdout != kubeseal_version
