@@ -38,3 +38,34 @@
     path: "/tmp/aws"
     state: absent
   when: not awscli_bin.stat.exists or (awscli_installed_version.stdout != awscli_version)
+
+- name: Check awscli ssm plugin install
+  stat:
+    path: '/usr/local/bin/session-manager-plugin'
+  register: awscli_ssm_plugin_bin
+
+- name: Check awscli ssm plugin installed version
+  shell:
+    cmd: session-manager-plugin --version
+  register: awscli_ssm_plugin_installed_version
+  when: awscli_ssm_plugin_bin.stat.exists
+  changed_when: false
+
+- name: Download awscli ssm plugin
+  get_url:
+    url: "https://s3.amazonaws.com/session-manager-downloads/plugin/{{ awscli_ssm_plugin_version }}/ubuntu_64bit/session-manager-plugin.deb"
+    dest: '/tmp/session-manager-plugin.deb'
+    mode: '0755'
+    force: yes
+  when: not awscli_ssm_plugin_bin.stat.exists or awscli_ssm_plugin_installed_version.stdout != awscli_ssm_plugin_version
+
+- name: Install awscli ssm plugin
+  shell:
+    cmd: 'dpkg -i /tmp/session-manager-plugin.deb'
+  when: not awscli_ssm_plugin_bin.stat.exists or awscli_ssm_plugin_installed_version.stdout != awscli_ssm_plugin_version
+
+- name: Remove awscli ssm plugin file from /tmp
+  file:
+    path: '/tmp/session-manager-plugin.deb'
+    state: absent
+  when: not awscli_ssm_plugin_bin.stat.exists or awscli_ssm_plugin_installed_version.stdout != awscli_ssm_plugin_version

@@ -10,6 +10,7 @@ Script and Ansible roles to provision a convenient Ubuntu devkit on WSL2 :)
 | ansible              | `n/a`                          | `latest` (pip)                  |
 | ansible-lint         | `n/a`                          | `latest` (pip)                  |
 | aws cli              | `awscli_version`               | `2.9.0`                         |
+| aws cli ssm plugin   | `awscli_ssm_plugin_version`    | `1.2.497.0`                     |
 | curl                 | `n/a`                          | `latest`                        |
 | docker               | `n/a`                          | `latest` (PPA)                  |
 | docker-compose       | `docker_compose_version`       | `2.12.2`                        |

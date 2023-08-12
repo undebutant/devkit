@@ -8,6 +8,7 @@
 - Add kubeseal binary
 - Add minikube binary
 - Add tmux to the installed packages
+- Add aws cli ssm plugin binary
 
 # v0.1.0
 
