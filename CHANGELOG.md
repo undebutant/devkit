@@ -7,6 +7,7 @@
 - Add k9s binary
 - Add kubeseal binary
 - Add minikube binary
+- Add tmux to the installed packages
 
 # v0.1.0
 

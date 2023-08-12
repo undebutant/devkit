@@ -28,6 +28,7 @@
       - software-properties-common
       # Allow ansible SSH connection using password
       - sshpass
+      - tmux
       - unzip
       - zip
     state: present

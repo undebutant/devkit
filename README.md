@@ -33,6 +33,7 @@ Script and Ansible roles to provision a convenient Ubuntu devkit on WSL2 :)
 | terraform            | `terraform_version`            | `1.3.5`                         |
 | terraform-docs       | `terraform_docs_version`       | `0.16.0`                        |
 | terragrunt           | `terragrunt_version`           | `0.40.2`                        |
+| tmux                 | `n/a`                          | `latest`                        |
 | unzip                | `n/a`                          | `latest`                        |
 | vals                 | `vals_version`                 | `0.19.0`                        |
 | vault                | `vault_version`                | `1.12.1`                        |
