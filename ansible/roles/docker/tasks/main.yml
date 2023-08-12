@@ -10,12 +10,36 @@
     groups: docker
     append: yes
 
-- name: Add docker gpg key to trusted keys
+- name: Check docker gpg key
+  stat:
+    path: '/etc/apt/trusted.gpg.d/docker.gpg'
+  register: docker_gpg_key
+
+- name: Download docker raw gpg key
   get_url:
     url: 'https://download.docker.com/linux/ubuntu/gpg'
-    dest: '/etc/apt/trusted.gpg.d/docker.gpg'
+    dest: '/tmp/docker_raw.gpg'
     mode: '0644'
     force: yes
+  when: not docker_gpg_key.stat.exists
+
+- name: Add docker gpg key to trusted keys
+  shell:
+    cmd: 'cat /tmp/docker_raw.gpg | gpg --dearmor -o /etc/apt/trusted.gpg.d/docker.gpg'
+  when: not docker_gpg_key.stat.exists
+
+- name: Make sure docker gpg key has correct permissions
+  file:
+    path: '/etc/apt/trusted.gpg.d/docker.gpg'
+    state: file
+    mode: '0644'
+  when: not docker_gpg_key.stat.exists
+
+- name: Delete docker temp gpg key
+  file:
+    path: '/tmp/docker_raw.gpg'
+    state: absent
+  when: not docker_gpg_key.stat.exists
 
 - name: Add docker apt-repository
   apt_repository:
@@ -34,7 +58,13 @@
 
 - name: Enable docker service
   systemd:
-    name: docker
+    name: docker.service
+    enabled: yes
+    masked: no
+
+- name: Enable docker socket
+  systemd:
+    name: docker.socket
     enabled: yes
     masked: no
 
@@ -44,8 +74,8 @@
     state: directory
     mode: '0755'
 
-- name: Copy docker daemon config
-  copy:
+- name: Create docker daemon config
+  template:
     src: 'daemon.json'
     dest: '/etc/docker/daemon.json'
     mode: '0600'

@@ -9,6 +9,7 @@
 - Add minikube binary
 - Add tmux to the installed packages
 - Add aws cli ssm plugin binary
+- Rework docker configuration
 
 # v0.1.0
 
