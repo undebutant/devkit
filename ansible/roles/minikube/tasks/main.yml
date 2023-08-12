@@ -1,0 +1,20 @@
+---
+- name: Check minikube install
+  stat:
+    path: '/usr/local/bin/minikube'
+  register: minikube_bin
+
+- name: Check minikube installed version
+  shell:
+    cmd: 'minikube version | sed -n -e "s/minikube version: v\(.*\)$/\1/p"'
+  register: minikube_installed_version
+  when: minikube_bin.stat.exists
+  changed_when: false
+
+- name: Install minikube
+  get_url:
+    url: "https://storage.googleapis.com/minikube/releases/v{{ minikube_version }}/minikube-linux-amd64"
+    dest: '/usr/local/bin/minikube'
+    mode: '0755'
+    force: yes
+  when: not minikube_bin.stat.exists or minikube_installed_version.stdout != minikube_version

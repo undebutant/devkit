@@ -26,6 +26,7 @@ Script and Ansible roles to provision a convenient Ubuntu devkit on WSL2 :)
 | kubectl              | `kubernetes_version`           | `1.25.4`                        |
 | kubeseal             | `kubeseal_version`             | `0.23.0`                        |
 | make                 | `n/a`                          | `latest`                        |
+| minikube             | `minikube_version`             | `1.31.1`                        |
 | pip                  | `n/a`                          | `latest` (Python installer)     |
 | python               | `n/a`                          | `3.10.x` (Ubuntu 22.04 default) |
 | sops                 | `sops_version`                 | `3.7.3`                         |

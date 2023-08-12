@@ -6,6 +6,7 @@
 - Add velero binary
 - Add k9s binary
 - Add kubeseal binary
+- Add minikube binary
 
 # v0.1.0
 
