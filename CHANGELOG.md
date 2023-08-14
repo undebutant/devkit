@@ -15,6 +15,7 @@
 - Add "--upgrade" flag for ansible install by pip
 - Fix version regex for vals and yq roles
 - Add variable for Ubuntu version codename
+- Update README instructions
 
 # v0.1.0
 

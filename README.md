@@ -1,6 +1,6 @@
-# wsl-devkit
+# devkit
 
-Script and Ansible roles to provision a convenient Ubuntu devkit on WSL2 :)
+Script and Ansible roles to provision a convenient devkit on Ubuntu :)
 
 
 ## What's inside
@@ -44,15 +44,16 @@ Script and Ansible roles to provision a convenient Ubuntu devkit on WSL2 :)
 
 ## Install and provision
 
-### Requirements
+If you have Ubuntu 22.04 installed on your computer, just go to the [Provision](./README.md#provision) section.
+
+
+### Special requirements for WSL
 
 - [WSL2 for Windows](https://docs.microsoft.com/en-us/windows/wsl/install) (version `0.67.6` or higher for [systemd](https://devblogs.microsoft.com/commandline/systemd-support-is-now-available-in-wsl) to work)
 - Ubuntu 22.04 (available in Microsoft Store)
 - (recommended) [Windows Terminal](https://docs.microsoft.com/en-us/windows/terminal/install)
 
-
-### WSL setup
-
+To install WSL using a terminal
 ```powershell
 # Run powershell as administrator
 wsl --install
@@ -82,11 +83,11 @@ systemctl list-unit-files --type=service
 ### Provision
 
 ```bash
-# Clone this repository inside WSL
-git clone git@github.com:undebutant/wsl-devkit.git
+# Clone this repository
+git clone git@github.com:undebutant/devkit.git
 
 # Go to the cloned folder and customize ansible variables
-cd ./wsl-devkit/ansible
+cd ./devkit/ansible
 nano ./vars.yml
 ```
 
