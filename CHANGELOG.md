@@ -1,4 +1,9 @@
-# Unreleased
+## Unreleased
+
+- Nothing yet
+
+
+## v0.2.0
 
 - Remove unused roles
 - Change docker `bip` and `default-address-pools` config
@@ -17,7 +22,8 @@
 - Add variable for Ubuntu version codename
 - Update README instructions
 
-# v0.1.0
+
+## v0.1.0
 
 - Initial commit
 - Remove docker socket config in `daemon.json` file to prevent conflict with systemd config
