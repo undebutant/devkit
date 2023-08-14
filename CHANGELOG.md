@@ -14,6 +14,7 @@
 - Add GPG keys for PPA manually to prevent deprecation in apt
 - Add "--upgrade" flag for ansible install by pip
 - Fix version regex for vals and yq roles
+- Add variable for Ubuntu version codename
 
 # v0.1.0
 

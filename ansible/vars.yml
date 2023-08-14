@@ -2,6 +2,7 @@
 ubuntu_user: '<your_username>'
 user_timezone: '<your_timezone>'
 
+ubuntu_codename: 'jammy'
 is_wsl: true
 
 go_projects_path: '<full_path_to_your_go_project_folder>'

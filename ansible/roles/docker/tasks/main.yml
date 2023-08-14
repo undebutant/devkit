@@ -43,7 +43,7 @@
 
 - name: Add docker apt-repository
   apt_repository:
-    repo: 'deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/docker.gpg] https://download.docker.com/linux/ubuntu jammy stable'
+    repo: "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/docker.gpg] https://download.docker.com/linux/ubuntu {{ ubuntu_codename }} stable"
     state: present
     mode: '0644'
     update_cache: yes

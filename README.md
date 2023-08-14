@@ -96,6 +96,7 @@ You need to edit Ansible variables before running the provision code, for exampl
 ubuntu_user: 'undeb'
 user_timezone: 'Europe/Paris'
 
+ubuntu_codename: 'jammy'
 is_wsl: true
 
 go_projects_path: '/home/undeb/lab/go'

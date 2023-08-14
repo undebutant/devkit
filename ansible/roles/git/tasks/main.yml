@@ -32,7 +32,7 @@
 
 - name: Add git-core PPA
   apt_repository:
-    repo: 'deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/git.gpg] https://ppa.launchpadcontent.net/git-core/ppa/ubuntu jammy main'
+    repo: "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/git.gpg] https://ppa.launchpadcontent.net/git-core/ppa/ubuntu {{ ubuntu_codename }} main"
     state: present
     mode: '0644'
     update_cache: yes
@@ -75,7 +75,7 @@
 
 - name: Add git-lfs apt-repository
   apt_repository:
-    repo: 'deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/git-lfs.gpg] https://packagecloud.io/github/git-lfs/ubuntu jammy main'
+    repo: "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/git-lfs.gpg] https://packagecloud.io/github/git-lfs/ubuntu {{ ubuntu_codename }} main"
     state: present
     mode: '0644'
     update_cache: yes
