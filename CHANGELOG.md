@@ -10,6 +10,7 @@
 - Add tmux to the installed packages
 - Add aws cli ssm plugin binary
 - Rework docker configuration
+- Update softwares versions
 
 # v0.1.0
 

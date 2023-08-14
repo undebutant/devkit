@@ -9,37 +9,37 @@ Script and Ansible roles to provision a convenient Ubuntu devkit on WSL2 :)
 | -------------------- | ------------------------------ | ------------------------------- |
 | ansible              | `n/a`                          | `latest` (pip)                  |
 | ansible-lint         | `n/a`                          | `latest` (pip)                  |
-| aws cli              | `awscli_version`               | `2.9.0`                         |
+| aws cli              | `awscli_version`               | `2.13.9`                        |
 | aws cli ssm plugin   | `awscli_ssm_plugin_version`    | `1.2.497.0`                     |
 | curl                 | `n/a`                          | `latest`                        |
 | docker               | `n/a`                          | `latest` (PPA)                  |
-| docker-compose       | `docker_compose_version`       | `2.12.2`                        |
-| editorconfig-checker | `editorconfig_checker_version` | `2.6.0`                         |
+| docker-compose       | `docker_compose_version`       | `2.20.3`                        |
+| editorconfig-checker | `editorconfig_checker_version` | `2.7.0`                         |
 | git                  | `n/a`                          | `latest` (PPA)                  |
 | git-lfs              | `n/a`                          | `latest` (PPA)                  |
 | gnupg                | `n/a`                          | `latest`                        |
-| go                   | `go_version`                   | `1.19.3`                        |
-| helm                 | `helm_version`                 | `3.10.2`                        |
-| helm diff            | `helm_diff_version`            | `3.6.0`                         |
-| helmfile             | `helmfile_version`             | `0.148.1`                       |
+| go                   | `go_version`                   | `1.21.0`                        |
+| helm                 | `helm_version`                 | `3.12.3`                        |
+| helm diff            | `helm_diff_version`            | `3.8.1`                         |
+| helmfile             | `helmfile_version`             | `0.155.1`                       |
 | jq                   | `n/a`                          | `latest`                        |
 | k9s                  | `k9s_version`                  | `0.27.4`                        |
-| kubectl              | `kubernetes_version`           | `1.25.4`                        |
+| kubectl              | `kubernetes_version`           | `1.27.4`                        |
 | kubeseal             | `kubeseal_version`             | `0.23.0`                        |
 | make                 | `n/a`                          | `latest`                        |
 | minikube             | `minikube_version`             | `1.31.1`                        |
 | pip                  | `n/a`                          | `latest` (Python installer)     |
 | python               | `n/a`                          | `3.10.x` (Ubuntu 22.04 default) |
 | sops                 | `sops_version`                 | `3.7.3`                         |
-| terraform            | `terraform_version`            | `1.3.5`                         |
+| terraform            | `terraform_version`            | `1.5.5`                         |
 | terraform-docs       | `terraform_docs_version`       | `0.16.0`                        |
-| terragrunt           | `terragrunt_version`           | `0.40.2`                        |
+| terragrunt           | `terragrunt_version`           | `0.49.1`                        |
 | tmux                 | `n/a`                          | `latest`                        |
 | unzip                | `n/a`                          | `latest`                        |
-| vals                 | `vals_version`                 | `0.19.0`                        |
-| vault                | `vault_version`                | `1.12.1`                        |
+| vals                 | `vals_version`                 | `0.26.2`                        |
+| vault                | `vault_version`                | `1.14.1`                        |
 | velero               | `velero_version`               | `1.11.1`                        |
-| yq                   | `yq_version`                   | `4.30.4`                        |
+| yq                   | `yq_version`                   | `4.35.1`                        |
 
 
 ## Install and provision
