@@ -1,7 +1,38 @@
 ---
+- name: Check git gpg key
+  stat:
+    path: '/etc/apt/trusted.gpg.d/git.gpg'
+  register: git_gpg_key
+
+- name: Download git raw gpg key
+  get_url:
+    url: 'https://keyserver.ubuntu.com/pks/lookup?op=get&search=0xE1DD270288B4E6030699E45FA1715D88E1DF1F24'
+    dest: '/tmp/git_raw.gpg'
+    mode: '0644'
+    force: yes
+  when: not git_gpg_key.stat.exists
+
+- name: Add git gpg key to trusted keys
+  shell:
+    cmd: 'cat /tmp/git_raw.gpg | gpg --dearmor -o /etc/apt/trusted.gpg.d/git.gpg'
+  when: not git_gpg_key.stat.exists
+
+- name: Make sure git gpg key has correct permissions
+  file:
+    path: '/etc/apt/trusted.gpg.d/git.gpg'
+    state: file
+    mode: '0644'
+  when: not git_gpg_key.stat.exists
+
+- name: Delete git temp gpg key
+  file:
+    path: '/tmp/git_raw.gpg'
+    state: absent
+  when: not git_gpg_key.stat.exists
+
 - name: Add git-core PPA
   apt_repository:
-    repo: ppa:git-core/ppa
+    repo: 'deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/git.gpg] https://ppa.launchpadcontent.net/git-core/ppa/ubuntu jammy main'
     state: present
     mode: '0644'
     update_cache: yes
@@ -11,12 +42,36 @@
     name: git
     state: present
 
-- name: Add git-lfs gpg key to trusted keys
+- name: Check git-lfs gpg key
+  stat:
+    path: '/etc/apt/trusted.gpg.d/git-lfs.gpg'
+  register: git_lfs_gpg_key
+
+- name: Download git-lfs raw gpg key
   get_url:
     url: 'https://packagecloud.io/github/git-lfs/gpgkey'
-    dest: '/etc/apt/trusted.gpg.d/git-lfs.gpg'
+    dest: '/tmp/git-lfs_raw.gpg'
     mode: '0644'
     force: yes
+  when: not git_lfs_gpg_key.stat.exists
+
+- name: Add git-lfs gpg key to trusted keys
+  shell:
+    cmd: 'cat /tmp/git-lfs_raw.gpg | gpg --dearmor -o /etc/apt/trusted.gpg.d/git-lfs.gpg'
+  when: not git_lfs_gpg_key.stat.exists
+
+- name: Make sure git-lfs gpg key has correct permissions
+  file:
+    path: '/etc/apt/trusted.gpg.d/git-lfs.gpg'
+    state: file
+    mode: '0644'
+  when: not git_lfs_gpg_key.stat.exists
+
+- name: Delete git-lfs temp gpg key
+  file:
+    path: '/tmp/git-lfs_raw.gpg'
+    state: absent
+  when: not git_lfs_gpg_key.stat.exists
 
 - name: Add git-lfs apt-repository
   apt_repository:
