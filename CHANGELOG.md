@@ -11,6 +11,8 @@
 - Add aws cli ssm plugin binary
 - Rework docker configuration
 - Update softwares versions
+- Add GPG keys for PPA manually to prevent deprecation in apt
+- Add "--upgrade" flag for ansible install by pip
 
 # v0.1.0
 

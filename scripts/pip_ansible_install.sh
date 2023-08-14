@@ -7,7 +7,7 @@ curl -fSL -# https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py
 sudo python3 /tmp/get-pip.py
 
 # Install the latest version of ansible using pip
-sudo python3 -m pip install ansible
+sudo python3 -m pip install --upgrade ansible
 
 # Clean residual files
 rm -f /tmp/get-pip.py
