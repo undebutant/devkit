@@ -6,7 +6,7 @@
 
 - name: Check yq installed version
   shell:
-    cmd: yq --version | sed -n -e 's/yq .* version \(.*\)$/\1/p'
+    cmd: 'yq --version | sed -n -e "s/yq .* version v\([0-9\.]*\)$/\1/p"'
   register: yq_installed_version
   when: yq_bin.stat.exists
   changed_when: false

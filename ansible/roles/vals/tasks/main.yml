@@ -6,7 +6,7 @@
 
 - name: Check vals installed version
   shell:
-    cmd: 'vals version | sed -n -e "s/Version: v\([0-9\.]*\)-.*$/\1/p"'
+    cmd: 'vals version | sed -n -e "s/Version: \([0-9\.]*\)$/\1/p"'
   register: vals_installed_version
   when: vals_bin.stat.exists
   changed_when: false
