@@ -94,9 +94,22 @@
     state: directory
     mode: '0755'
 
+- name: Check docker-compose install
+  stat:
+    path: '/usr/local/lib/docker/cli-plugins/docker-compose'
+  register: docker_compose_bin
+
+- name: Check docker-compose installed version
+  shell:
+    cmd: docker compose version --short
+  register: docker_compose_installed_version
+  when: docker_compose_bin.stat.exists
+  changed_when: false
+
 - name: Install docker-compose binary
   get_url:
     url: "https://github.com/docker/compose/releases/download/v{{ docker_compose_version }}/docker-compose-linux-x86_64"
     dest: '/usr/local/lib/docker/cli-plugins/docker-compose'
     mode: '0755'
     force: yes
+  when: not docker_compose_bin.stat.exists or (docker_compose_installed_version.stdout != docker_compose_version)

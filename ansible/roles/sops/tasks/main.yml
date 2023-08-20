@@ -6,7 +6,7 @@
 
 - name: Check sops installed version
   shell:
-    cmd: sops -v | sed -n -e 's/sops \(.*\) .*$/\1/p'
+    cmd: sops -v | sed -n -e 's/sops \([0-9\.]*\)$/\1/p'
   register: sops_installed_version
   when: sops_bin.stat.exists
   changed_when: false

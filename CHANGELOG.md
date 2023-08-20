@@ -1,6 +1,7 @@
 ## Unreleased
 
-- Nothing yet
+- Fix version regex for sops
+- Add version regex check on docker-compose
 
 
 ## v0.2.0
