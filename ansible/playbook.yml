@@ -20,6 +20,7 @@
     - { role: vault, tags: ['vault'] }
     - { role: docker, tags: ['docker'] }
     - { role: kubernetes, tags: ['kubernetes'] }
+    - { role: kustomize, tags: ['kustomize'] }
     - { role: minikube, tags: ['minikube'] }
     - { role: k9s, tags: ['k9s'] }
     - { role: kubeseal, tags: ['kubeseal'] }

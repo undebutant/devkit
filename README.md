@@ -26,6 +26,7 @@ Script and Ansible roles to provision a convenient devkit on Ubuntu :)
 | k9s                  | `k9s_version`                  | `0.27.4`                        |
 | kubectl              | `kubernetes_version`           | `1.27.4`                        |
 | kubeseal             | `kubeseal_version`             | `0.23.0`                        |
+| kustomize            | `kustomize_version`            | `5.1.1`                         |
 | make                 | `n/a`                          | `latest`                        |
 | minikube             | `minikube_version`             | `1.31.1`                        |
 | pip                  | `n/a`                          | `latest` (Python installer)     |

@@ -5,6 +5,7 @@
 - Add python-is-python3 package to alias "python" to "python3"
 - Run apt update in basics role
 - Use booleans instead of "yes" and "no" for ansible `become`
+- Add kustomize binary
 
 
 ## v0.2.0

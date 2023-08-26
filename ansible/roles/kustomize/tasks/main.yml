@@ -1,0 +1,41 @@
+---
+- name: Check kustomize install
+  stat:
+    path: '/usr/local/bin/kustomize'
+  register: kustomize_bin
+
+- name: Check kustomize installed version
+  shell:
+    cmd: kustomize version | sed -n -e 's/v\([0-9\.]*\)$/\1/p'
+  register: kustomize_installed_version
+  when: kustomize_bin.stat.exists
+  changed_when: false
+
+- name: Create a temporary directory to extract kustomize archive
+  file:
+    path: '/tmp/kustomize-linux-amd64'
+    state: directory
+    mode: '0755'
+  when: not kustomize_bin.stat.exists or kustomize_installed_version.stdout != kustomize_version
+
+- name: Extract kustomize archive
+  unarchive:
+    src: "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize/v{{ kustomize_version }}/kustomize_v{{ kustomize_version }}_linux_amd64.tar.gz"
+    remote_src: yes
+    dest: '/tmp/kustomize-linux-amd64/'
+    mode: '0755'
+  when: not kustomize_bin.stat.exists or kustomize_installed_version.stdout != kustomize_version
+
+- name: Copy kustomize binary
+  copy:
+    src: "/tmp/kustomize-linux-amd64/kustomize"
+    remote_src: yes
+    dest: '/usr/local/bin/kustomize'
+    mode: '0755'
+  when: not kustomize_bin.stat.exists or kustomize_installed_version.stdout != kustomize_version
+
+- name: Remove kustomize folder from /tmp
+  file:
+    path: '/tmp/kustomize-linux-amd64'
+    state: absent
+  when: not kustomize_bin.stat.exists or kustomize_installed_version.stdout != kustomize_version
