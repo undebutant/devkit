@@ -4,6 +4,7 @@
 - Add version regex check on docker-compose
 - Add python-is-python3 package to alias "python" to "python3"
 - Run apt update in basics role
+- Use booleans instead of "yes" and "no" for ansible `become`
 
 
 ## v0.2.0

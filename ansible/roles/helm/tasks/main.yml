@@ -92,16 +92,16 @@
   shell:
     cmd: helm diff version
   register: helm_diff_installed_version
-  become: no
+  become: false
   when: helm_diff_folder.stat.exists
   changed_when: false
 
 - name: Remove older helm diff plugin
   command: 'helm plugin uninstall diff'
-  become: no
+  become: false
   when: helm_diff_folder.stat.exists and helm_diff_installed_version.stdout != helm_diff_version
 
 - name: Install helm diff plugin
   command: 'helm plugin install https://github.com/databus23/helm-diff --version {{ helm_diff_version }}'
-  become: no
+  become: false
   when: not helm_diff_folder.stat.exists or helm_diff_installed_version.stdout != helm_diff_version
