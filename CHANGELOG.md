@@ -3,6 +3,7 @@
 - Fix version regex for sops
 - Add version regex check on docker-compose
 - Add python-is-python3 package to alias "python" to "python3"
+- Run apt update in basics role
 
 
 ## v0.2.0

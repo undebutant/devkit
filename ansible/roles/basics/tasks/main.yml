@@ -4,6 +4,10 @@
     name: aptitude
     state: present
 
+- name: Update apt cache
+  apt:
+    update_cache: yes
+
 # Workaround for Let's Encrypt root certificate expiration
 # https://scotthelme.co.uk/lets-encrypt-old-root-expiration
 - name: Install latest ca-certificates package version
