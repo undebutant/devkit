@@ -6,6 +6,7 @@
 - Run apt update in basics role
 - Use booleans instead of "yes" and "no" for ansible `become`
 - Add kustomize binary
+- Add locale variable and configuration
 
 
 ## v0.2.0

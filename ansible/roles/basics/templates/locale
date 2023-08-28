@@ -1,0 +1,21 @@
+# You may need to run the following lines (replace 'en_US.UTF-8' with your locale)
+#
+# sudo locale-gen 'C.UTF-8'
+# sudo locale-gen 'en_US.UTF-8'
+# sudo dpkg-reconfigure locales
+#
+LANG={{ user_locale_lang }}
+LANGUAGE=
+LC_CTYPE="{{ user_locale_lc }}"
+LC_NUMERIC="{{ user_locale_lc }}"
+LC_TIME="{{ user_locale_lc }}"
+LC_COLLATE="{{ user_locale_lc }}"
+LC_MONETARY="{{ user_locale_lc }}"
+LC_MESSAGES="{{ user_locale_lc }}"
+LC_PAPER="{{ user_locale_lc }}"
+LC_NAME="{{ user_locale_lc }}"
+LC_ADDRESS="{{ user_locale_lc }}"
+LC_TELEPHONE="{{ user_locale_lc }}"
+LC_MEASUREMENT="{{ user_locale_lc }}"
+LC_IDENTIFICATION="{{ user_locale_lc }}"
+LC_ALL={{ user_locale_lc }}

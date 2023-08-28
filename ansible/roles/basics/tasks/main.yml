@@ -25,6 +25,8 @@
       - gnupg
       - htop
       - jq
+      # Package to configure locale
+      - locales
       # Use python3 if a "python" command is issued
       - python-is-python3
       # Package required for pip3
@@ -43,6 +45,12 @@
   copy:
     src: 'ansible.sh'
     dest: '/etc/profile.d/ansible.sh'
+    mode: '0644'
+
+- name: Configure locale variables
+  template:
+    src: 'locale'
+    dest: '/etc/default/locale'
     mode: '0644'
 
 - name: Set timezone to the one set in vars.yml
