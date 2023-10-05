@@ -18,6 +18,8 @@
 - name: Install basic packages
   apt:
     name:
+      # Contains htpasswd
+      - apache2-utils
       - apt-transport-https
       # Install make and other useful compilation tools
       - build-essential

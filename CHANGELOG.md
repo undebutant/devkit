@@ -7,6 +7,7 @@
 - Use booleans instead of "yes" and "no" for ansible `become`
 - Add kustomize binary
 - Add locale variable and configuration
+- Add `apache2-utils` package
 
 
 ## v0.2.0
