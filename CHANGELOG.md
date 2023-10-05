@@ -1,5 +1,10 @@
 ## Unreleased
 
+- Nothing yet ;)
+
+
+## v0.3.0
+
 - Fix version regex for sops
 - Add version regex check on docker-compose
 - Add python-is-python3 package to alias "python" to "python3"
