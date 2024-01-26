@@ -1,6 +1,7 @@
 ## Unreleased
 
 - Update softwares versions
+- Modify sops download URL
 
 
 ## v0.3.0
