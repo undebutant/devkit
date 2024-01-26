@@ -1,5 +1,10 @@
 ## Unreleased
 
+- Nothing yet ;)
+
+
+## v0.3.1
+
 - Update softwares versions
 - Modify sops download URL
 
