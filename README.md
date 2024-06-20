@@ -9,38 +9,38 @@ Script and Ansible roles to provision a convenient devkit on Ubuntu :)
 | -------------------- | ------------------------------ | ------------------------------- |
 | ansible              | `n/a`                          | `latest` (pip)                  |
 | ansible-lint         | `n/a`                          | `latest` (pip)                  |
-| aws cli              | `awscli_version`               | `2.15.14`                       |
-| aws cli ssm plugin   | `awscli_ssm_plugin_version`    | `1.2.553.0`                     |
+| aws cli              | `awscli_version`               | `2.16.12`                       |
+| aws cli ssm plugin   | `awscli_ssm_plugin_version`    | `1.2.633.0`                     |
 | curl                 | `n/a`                          | `latest`                        |
 | docker               | `n/a`                          | `latest` (PPA)                  |
-| docker-compose       | `docker_compose_version`       | `2.24.3`                        |
-| editorconfig-checker | `editorconfig_checker_version` | `2.8.0`                         |
+| docker-compose       | `docker_compose_version`       | `2.27.1`                        |
+| editorconfig-checker | `editorconfig_checker_version` | `3.0.1`                         |
 | git                  | `n/a`                          | `latest` (PPA)                  |
 | git-lfs              | `n/a`                          | `latest` (PPA)                  |
 | gnupg                | `n/a`                          | `latest`                        |
-| go                   | `go_version`                   | `1.21.6`                        |
-| helm                 | `helm_version`                 | `3.14.0`                        |
-| helm diff            | `helm_diff_version`            | `3.9.2`                         |
-| helmfile             | `helmfile_version`             | `0.161.0`                       |
+| go                   | `go_version`                   | `1.22.4`                        |
+| helm                 | `helm_version`                 | `3.15.2`                        |
+| helm diff            | `helm_diff_version`            | `3.9.8`                         |
+| helmfile             | `helmfile_version`             | `0.165.0`                       |
 | jq                   | `n/a`                          | `latest`                        |
-| k9s                  | `k9s_version`                  | `0.31.7`                        |
-| kubectl              | `kubernetes_version`           | `1.29.1`                        |
-| kubeseal             | `kubeseal_version`             | `0.25.0`                        |
-| kustomize            | `kustomize_version`            | `5.3.0`                         |
+| k9s                  | `k9s_version`                  | `0.32.5`                        |
+| kubectl              | `kubernetes_version`           | `1.30.2`                        |
+| kubeseal             | `kubeseal_version`             | `0.26.3`                        |
+| kustomize            | `kustomize_version`            | `5.4.2`                         |
 | make                 | `n/a`                          | `latest`                        |
-| minikube             | `minikube_version`             | `1.32.0`                        |
+| minikube             | `minikube_version`             | `1.33.1`                        |
 | pip                  | `n/a`                          | `latest` (Python installer)     |
 | python               | `n/a`                          | `3.10.x` (Ubuntu 22.04 default) |
 | sops                 | `sops_version`                 | `3.8.1`                         |
-| terraform            | `terraform_version`            | `1.7.1`                         |
-| terraform-docs       | `terraform_docs_version`       | `0.17.0`                        |
-| terragrunt           | `terragrunt_version`           | `0.54.22`                       |
+| terraform            | `terraform_version`            | `1.8.5`                         |
+| terraform-docs       | `terraform_docs_version`       | `0.18.0`                        |
+| terragrunt           | `terragrunt_version`           | `0.59.4`                        |
 | tmux                 | `n/a`                          | `latest`                        |
 | unzip                | `n/a`                          | `latest`                        |
-| vals                 | `vals_version`                 | `0.33.0`                        |
-| vault                | `vault_version`                | `1.15.4`                        |
-| velero               | `velero_version`               | `1.12.3`                        |
-| yq                   | `yq_version`                   | `4.40.5`                        |
+| vals                 | `vals_version`                 | `0.37.2`                        |
+| vault                | `vault_version`                | `1.17.0`                        |
+| velero               | `velero_version`               | `1.14.0`                        |
+| yq                   | `yq_version`                   | `4.44.2`                        |
 
 
 ## Install and provision
