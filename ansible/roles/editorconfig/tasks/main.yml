@@ -6,7 +6,7 @@
 
 - name: Check editorconfig-checker installed version
   shell:
-    cmd: ec-check -version
+    cmd: ec-check -version | sed -n -e 's|v\(.*\)$|\1|p'
   register: editorconfig_checker_installed_version
   when: editorconfig_checker_bin.stat.exists
   changed_when: false
@@ -20,7 +20,7 @@
 
 - name: Extract editorconfig-checker archive
   unarchive:
-    src: "https://github.com/editorconfig-checker/editorconfig-checker/releases/download/{{ editorconfig_checker_version }}/ec-linux-amd64.tar.gz"
+    src: "https://github.com/editorconfig-checker/editorconfig-checker/releases/download/v{{ editorconfig_checker_version }}/ec-linux-amd64.tar.gz"
     remote_src: yes
     dest: '/tmp/editorconfig-checker-linux-amd64/'
     mode: '0755'

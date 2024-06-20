@@ -1,6 +1,7 @@
 ## Unreleased
 
 - Update softwares versions
+- Change editorconfig-checker download URL and version parsing
 
 
 ## v0.3.1
