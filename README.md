@@ -100,7 +100,7 @@ user_timezone: 'Europe/Paris'
 
 # See https://help.ubuntu.com/community/Locale
 user_locale_lang: 'en_US.UTF-8'
-user_locale_lc: 'en_US.UTF-8'
+user_locale_lc: 'fr_FR.UTF-8'
 
 ubuntu_codename: 'jammy'
 is_wsl: true

@@ -1,6 +1,6 @@
 ## Unreleased
 
-- Nothing yet ;)
+- Update README example
 
 
 ## v0.3.3
