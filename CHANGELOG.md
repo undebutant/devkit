@@ -1,6 +1,6 @@
 ## Unreleased
 
-- Nothing yet ;)
+- Update softwares versions
 
 
 ## v0.3.2
