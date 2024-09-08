@@ -4,6 +4,7 @@
 - Add OpenTofu install role
 - Update README example
 - Modify locale template
+- Customize filename when adding apt repositories
 
 
 ## v0.3.3

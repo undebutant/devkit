@@ -34,6 +34,7 @@
   apt_repository:
     repo: "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/git.gpg] https://ppa.launchpadcontent.net/git-core/ppa/ubuntu {{ ubuntu_codename }} main"
     state: present
+    filename: git-core
     mode: '0644'
     update_cache: yes
 
@@ -77,6 +78,7 @@
   apt_repository:
     repo: "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/git-lfs.gpg] https://packagecloud.io/github/git-lfs/ubuntu {{ ubuntu_codename }} main"
     state: present
+    filename: git-lfs
     mode: '0644'
     update_cache: yes
 
