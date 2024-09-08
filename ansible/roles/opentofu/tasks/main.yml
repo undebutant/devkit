@@ -1,0 +1,41 @@
+---
+- name: Check opentofu install
+  stat:
+    path: '/usr/local/bin/tofu'
+  register: opentofu_bin
+
+- name: Check opentofu installed version
+  shell:
+    cmd: tofu version | sed -n -e 's/OpenTofu v\([0-9\.]*\)$/\1/p'
+  register: opentofu_installed_version
+  when: opentofu_bin.stat.exists
+  changed_when: false
+
+- name: Create a temporary directory to extract opentofu archive
+  file:
+    path: '/tmp/opentofu-linux-amd64'
+    state: directory
+    mode: '0755'
+  when: not opentofu_bin.stat.exists or opentofu_installed_version.stdout != opentofu_version
+
+- name: Extract opentofu archive
+  unarchive:
+    src: "https://github.com/opentofu/opentofu/releases/download/v{{ opentofu_version }}/tofu_{{ opentofu_version }}_linux_amd64.zip"
+    remote_src: yes
+    dest: '/tmp/opentofu-linux-amd64/'
+    mode: '0755'
+  when: not opentofu_bin.stat.exists or opentofu_installed_version.stdout != opentofu_version
+
+- name: Copy opentofu binary
+  copy:
+    src: "/tmp/opentofu-linux-amd64/tofu"
+    remote_src: yes
+    dest: '/usr/local/bin/tofu'
+    mode: '0755'
+  when: not opentofu_bin.stat.exists or opentofu_installed_version.stdout != opentofu_version
+
+- name: Remove opentofu folder from /tmp
+  file:
+    path: '/tmp/opentofu-linux-amd64'
+    state: absent
+  when: not opentofu_bin.stat.exists or opentofu_installed_version.stdout != opentofu_version

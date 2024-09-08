@@ -1,6 +1,7 @@
 ## Unreleased
 
 - Split terragrunt and terraform roles
+- Add OpenTofu install role
 - Update README example
 - Modify locale template
 

@@ -29,6 +29,7 @@ Script and Ansible roles to provision a convenient devkit on Ubuntu :)
 | kustomize            | `kustomize_version`            | `5.4.3`                         |
 | make                 | `n/a`                          | `latest`                        |
 | minikube             | `minikube_version`             | `1.33.1`                        |
+| opentofu             | `opentofu_version`             | `1.8.2`                         |
 | pip                  | `n/a`                          | `latest` (Python installer)     |
 | python               | `n/a`                          | `3.10.x` (Ubuntu 22.04 default) |
 | sops                 | `sops_version`                 | `3.9.0`                         |
