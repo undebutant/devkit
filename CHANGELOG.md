@@ -1,6 +1,7 @@
 ## Unreleased
 
 - Update README example
+- Modify locale template
 
 
 ## v0.3.3
