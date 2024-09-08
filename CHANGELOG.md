@@ -1,5 +1,10 @@
 ## Unreleased
 
+- Nothing yet ;)
+
+
+## v0.4.0
+
 - Split terragrunt and terraform roles
 - Add OpenTofu install role
 - Update README example
