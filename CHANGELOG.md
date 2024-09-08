@@ -1,5 +1,6 @@
 ## Unreleased
 
+- Split terragrunt and terraform roles
 - Update README example
 - Modify locale template
 
