@@ -31,11 +31,6 @@
       - locales
       # Use python3 if a "python" command is issued
       - python-is-python3
-      # Package required for pip3
-      - python3-distutils
-      # Package required for ansible-lint
-      - python3-setuptools
-      - software-properties-common
       # Allow ansible SSH connection using password
       - sshpass
       - tmux

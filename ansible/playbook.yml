@@ -12,7 +12,6 @@
   roles:
     - { role: basics, tags: ['basics'] }
     - { role: git, tags: ['git'] }
-    - { role: ansible_lint, tags: ['ansible-lint'] }
     - { role: yq, tags: ['yq'] }
     - { role: terraform, tags: ['terraform'] }
     - { role: opentofu, tags: ['opentofu'] }

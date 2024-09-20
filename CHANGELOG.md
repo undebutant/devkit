@@ -3,6 +3,7 @@
 - Update ansible install script to use venv
 - Expose python interpreter ansible variable
 - Update playbooks for ubuntu 24.04
+- Remove ansible-lint from playbooks
 
 
 ## v0.4.0
