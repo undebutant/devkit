@@ -1,0 +1,29 @@
+---
+- name: Check packer install
+  stat:
+    path: '/usr/local/bin/packer'
+  register: packer_bin
+
+- name: Check packer installed version
+  shell:
+    cmd: packer version | sed -n -e 's/Packer v\(.*\)$/\1/p'
+  register: packer_installed_version
+  when: packer_bin.stat.exists
+  changed_when: false
+
+- name: Unzip packer archive
+  unarchive:
+    src: "https://releases.hashicorp.com/packer/{{ packer_version }}/packer_{{ packer_version }}_linux_amd64.zip"
+    remote_src: yes
+    dest: '/usr/local/bin/'
+    mode: '0755'
+  when: not packer_bin.stat.exists or packer_installed_version.stdout != packer_version
+
+- name: Create cache plugin folder for packer
+  file:
+    path: "/home/{{ ubuntu_user }}/.config/packer"
+    state: directory
+    mode: '0755'
+    recurse: yes
+    owner: "{{ ubuntu_user }}"
+    group: "{{ ubuntu_user }}"

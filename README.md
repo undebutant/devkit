@@ -29,6 +29,7 @@ Script and Ansible roles to provision a convenient devkit on Ubuntu :)
 | make                 | `n/a`                          | `latest`                         |
 | minikube             | `minikube_version`             | `1.33.1`                         |
 | opentofu             | `opentofu_version`             | `1.8.2`                          |
+| packer               | `packer_version`               | `1.11.2`                         |
 | python               | `n/a`                          | `3.12.x` (Ubuntu 24.04 default)  |
 | sops                 | `sops_version`                 | `3.9.0`                          |
 | terraform            | `terraform_version`            | `1.9.5`                          |

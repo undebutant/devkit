@@ -1,6 +1,6 @@
 ## Unreleased
 
-- Nothing yet ;)
+- Add packer install role
 
 
 ## v0.5.0

@@ -13,6 +13,7 @@
     - { role: basics, tags: ['basics'] }
     - { role: git, tags: ['git'] }
     - { role: yq, tags: ['yq'] }
+    - { role: packer, tags: ['packer'] }
     - { role: terraform, tags: ['terraform'] }
     - { role: opentofu, tags: ['opentofu'] }
     - { role: terragrunt, tags: ['terragrunt'] }
