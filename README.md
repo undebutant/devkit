@@ -30,8 +30,7 @@ Script and Ansible roles to provision a convenient devkit on Ubuntu :)
 | make                 | `n/a`                          | `latest`                        |
 | minikube             | `minikube_version`             | `1.33.1`                        |
 | opentofu             | `opentofu_version`             | `1.8.2`                         |
-| pip                  | `n/a`                          | `latest` (Python installer)     |
-| python               | `n/a`                          | `3.10.x` (Ubuntu 22.04 default) |
+| python               | `n/a`                          | `3.12.x` (Ubuntu 24.04 default) |
 | sops                 | `sops_version`                 | `3.9.0`                         |
 | terraform            | `terraform_version`            | `1.9.5`                         |
 | terraform-docs       | `terraform_docs_version`       | `0.18.0`                        |
@@ -46,16 +45,16 @@ Script and Ansible roles to provision a convenient devkit on Ubuntu :)
 
 ## Install and provision
 
-If you have Ubuntu 22.04 installed on your computer, just go to the [Provision](./README.md#provision) section.
+If you have Ubuntu 24.04 installed on your computer, just go to the [Provision](./README.md#provision) section.
 
 
 ### Special requirements for WSL
 
 - [WSL2 for Windows](https://docs.microsoft.com/en-us/windows/wsl/install) (version `0.67.6` or higher for [systemd](https://devblogs.microsoft.com/commandline/systemd-support-is-now-available-in-wsl) to work)
-- Ubuntu 22.04 (available in Microsoft Store)
+- Ubuntu 24.04 (available in Microsoft Store)
 - (recommended) [Windows Terminal](https://docs.microsoft.com/en-us/windows/terminal/install)
 
-To install WSL and Ubuntu 22.04 using a Powershell terminal
+To install WSL and Ubuntu 24.04 using a Powershell terminal
 ```powershell
 # Run powershell as administrator
 wsl --install
@@ -64,22 +63,22 @@ wsl --install
 wsl --version
 wsl --update
 
-# Install Ubuntu 22.04
-wsl --install Ubuntu-22.04
+# Install Ubuntu 24.04
+wsl --install Ubuntu-24.04
 ```
 
-Launch Ubuntu 22.04, then edit `/etc/wsl.conf` with your favorite editor
+Launch Ubuntu 24.04, then edit `/etc/wsl.conf` with your favorite editor
 ```toml
 [boot]
 systemd=true
 ```
 
-Restart Ubuntu 22.04
+Restart Ubuntu 24.04
 ```powershell
 wsl --shutdown
 ```
 
-Launch again Ubuntu 22.04 and check that systemd is working
+Launch again Ubuntu 24.04 and check that systemd is working
 ```bash
 systemctl list-unit-files --type=service
 ```
@@ -112,7 +111,7 @@ user_timezone: 'Europe/Paris'
 user_locale_lang: 'en_US.UTF-8'
 user_locale_lc: 'fr_FR.UTF-8'
 
-ubuntu_codename: 'jammy'
+ubuntu_codename: 'noble'
 is_wsl: true
 
 go_projects_path: '/home/undeb/lab/go'

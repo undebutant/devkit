@@ -8,7 +8,7 @@ user_timezone: '<your_timezone>'
 user_locale_lang: 'en_US.UTF-8'
 user_locale_lc: 'en_US.UTF-8'
 
-ubuntu_codename: 'jammy'
+ubuntu_codename: 'noble'
 is_wsl: true
 
 go_projects_path: '<full_path_to_your_go_project_folder>'
