@@ -107,10 +107,6 @@ ansible_playbook_python: '/home/undeb/ansible-venv/bin/python3'
 ubuntu_user: 'undeb'
 user_timezone: 'Europe/Paris'
 
-# See https://help.ubuntu.com/community/Locale
-user_locale_lang: 'en_US.UTF-8'
-user_locale_lc: 'fr_FR.UTF-8'
-
 ubuntu_codename: 'noble'
 is_wsl: true
 

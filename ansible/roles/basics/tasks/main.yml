@@ -44,12 +44,6 @@
     dest: '/etc/profile.d/ansible.sh'
     mode: '0644'
 
-- name: Configure locale variables
-  template:
-    src: 'locale'
-    dest: '/etc/default/locale'
-    mode: '0644'
-
 - name: Set timezone to the one set in vars.yml
   timezone:
     name: "{{ user_timezone }}"

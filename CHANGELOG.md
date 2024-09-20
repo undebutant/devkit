@@ -1,6 +1,6 @@
 ## Unreleased
 
-- Nothing yet ;)
+- Remove locale template
 
 
 ## v0.5.1
