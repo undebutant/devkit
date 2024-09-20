@@ -118,12 +118,15 @@ go_projects_path: '/home/undeb/lab/go'
 
 After that, you are all set to provision your devkit
 ```bash
+# Specify path to the venv where ansible is installed
+export ANSIBLE_BIN='/home/undeb/ansible-venv/bin/ansible-playbook'
+
 # Provision everything else with ansible (add --diff for details on the changes)
-ansible-playbook -i inventory.yml playbook.yml --diff
+$ANSIBLE_BIN -i inventory.yml playbook.yml --diff
 
 # To provision specific roles with custom variables
-ansible-playbook -i inventory.yml -t go -e "go_version=1.17.5" playbook.yml --diff
-ansible-playbook -i inventory.yml -t terraform -e "terraform_version=1.0.11 terragrunt_version=0.34.3" playbook.yml --diff
+$ANSIBLE_BIN -i inventory.yml -t go -e "go_version=1.17.5" playbook.yml --diff
+$ANSIBLE_BIN -i inventory.yml -t terraform -e "terraform_version=1.0.11 terragrunt_version=0.34.3" playbook.yml --diff
 ```
 
 
