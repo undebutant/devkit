@@ -6,7 +6,7 @@
 
 - name: Download git raw gpg key
   get_url:
-    url: 'https://keyserver.ubuntu.com/pks/lookup?op=get&search=0xE1DD270288B4E6030699E45FA1715D88E1DF1F24'
+    url: 'https://keyserver.ubuntu.com/pks/lookup?op=get&search=0xF911AB184317630C59970973E363C90F8F1B6217'
     dest: '/tmp/git_raw.gpg'
     mode: '0644'
     force: yes

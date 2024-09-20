@@ -4,6 +4,7 @@
 - Expose python interpreter ansible variable
 - Update playbooks for ubuntu 24.04
 - Remove ansible-lint from playbooks
+- Update git-core ppa gpg key
 
 
 ## v0.4.0
