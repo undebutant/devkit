@@ -1,5 +1,10 @@
 ## Unreleased
 
+- Nothing yet ;)
+
+
+## v0.5.0
+
 - Update ansible install script to use venv
 - Expose python interpreter ansible variable
 - Update playbooks for ubuntu 24.04
