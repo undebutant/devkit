@@ -1,6 +1,7 @@
 ## Unreleased
 
-- Nothing yet ;)
+- Update ansible install script to use venv
+- Expose python interpreter ansible variable
 
 
 ## v0.4.0

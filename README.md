@@ -55,7 +55,7 @@ If you have Ubuntu 22.04 installed on your computer, just go to the [Provision](
 - Ubuntu 22.04 (available in Microsoft Store)
 - (recommended) [Windows Terminal](https://docs.microsoft.com/en-us/windows/terminal/install)
 
-To install WSL using a terminal
+To install WSL and Ubuntu 22.04 using a Powershell terminal
 ```powershell
 # Run powershell as administrator
 wsl --install
@@ -63,9 +63,12 @@ wsl --install
 # Check wsl version and update if needed
 wsl --version
 wsl --update
+
+# Install Ubuntu 22.04
+wsl --install Ubuntu-22.04
 ```
 
-Install and launch Ubuntu 22.04, then edit `/etc/wsl.conf` with your favorite editor
+Launch Ubuntu 22.04, then edit `/etc/wsl.conf` with your favorite editor
 ```toml
 [boot]
 systemd=true
@@ -88,14 +91,20 @@ systemctl list-unit-files --type=service
 # Clone this repository
 git clone git@github.com:undebutant/devkit.git
 
-# Go to the cloned folder and customize ansible variables
-cd ./devkit/ansible
+# Go to the cloned folder and install the latest ansible version in a dedicated venv
+cd ./devkit/scripts
+./ansible_install.sh /home/undeb/ansible-venv
+
+# Then customize ansible variables
+cd ../ansible
 nano ./vars.yml
 ```
 
 You need to edit Ansible variables before running the provision code, for example
 ```yaml
 ---
+ansible_playbook_python: '/home/undeb/ansible-venv/bin/python3'
+
 ubuntu_user: 'undeb'
 user_timezone: 'Europe/Paris'
 
@@ -111,12 +120,7 @@ go_projects_path: '/home/undeb/lab/go'
 
 After that, you are all set to provision your devkit
 ```bash
-# Install the latest pip and ansible versions
-cd ../scripts
-./pip_ansible_install.sh
-
 # Provision everything else with ansible (add --diff for details on the changes)
-cd ../ansible
 ansible-playbook -i inventory.yml playbook.yml --diff
 
 # To provision specific roles with custom variables

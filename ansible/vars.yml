@@ -1,4 +1,6 @@
 ---
+ansible_playbook_python: '<full_path_to_your_venv_with_ansible>'
+
 ubuntu_user: '<your_username>'
 user_timezone: '<your_timezone>'
 
