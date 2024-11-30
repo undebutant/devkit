@@ -1,5 +1,10 @@
 ## Unreleased
 
+- Nothing yet ;)
+
+
+# v0.6.0
+
 - Remove locale template
 - Update softwares versions
 
