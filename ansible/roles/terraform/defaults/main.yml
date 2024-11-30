@@ -1,4 +1,4 @@
 ---
-terraform_version: 1.9.5
-terraform_docs_version: 0.18.0
-terragrunt_version: 0.67.3
+terraform_version: 1.9.8
+terraform_docs_version: 0.19.0
+terragrunt_version: 0.69.3

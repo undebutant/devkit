@@ -1,4 +1,4 @@
 ---
-helm_version: 3.15.4
-helm_diff_version: 3.9.10
-helmfile_version: 0.167.1
+helm_version: 3.16.3
+helm_diff_version: 3.9.12
+helmfile_version: 0.169.1
