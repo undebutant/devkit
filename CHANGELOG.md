@@ -1,5 +1,10 @@
 ## Unreleased
 
+- Nothing yet ;)
+
+
+# v0.6.1
+
 - Update softwares versions
 
 
