@@ -1,5 +1,5 @@
 {
-    "iptables": {% if is_wsl %}false{% else %}true{% endif %},
+    "iptables": true,
     "bip": "10.240.0.1/24",
     "default-address-pools": [
         {

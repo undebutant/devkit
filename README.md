@@ -43,48 +43,7 @@ Script and Ansible roles to provision a convenient devkit on Debian / Ubuntu :)
 | yq                   | `yq_version`                   | `4.45.1`                         |
 
 
-## Install and provision
-
-If you have Debian or Ubuntu as main OS on your computer, just go to the [Provision](./README.md#provision) section.
-
-
-### Special requirements for WSL
-
-- [WSL2 for Windows](https://docs.microsoft.com/en-us/windows/wsl/install) (version `0.67.6` or higher for [systemd](https://devblogs.microsoft.com/commandline/systemd-support-is-now-available-in-wsl) to work)
-- Ubuntu 24.04 (available in Microsoft Store)
-- (recommended) [Windows Terminal](https://docs.microsoft.com/en-us/windows/terminal/install)
-
-To install WSL and Ubuntu 24.04 using a Powershell terminal
-```powershell
-# Run powershell as administrator
-wsl --install
-
-# Check wsl version and update if needed
-wsl --version
-wsl --update
-
-# Install Ubuntu 24.04
-wsl --install Ubuntu-24.04
-```
-
-Launch Ubuntu 24.04, then edit `/etc/wsl.conf` with your favorite editor
-```toml
-[boot]
-systemd=true
-```
-
-Restart Ubuntu 24.04
-```powershell
-wsl --shutdown
-```
-
-Launch again Ubuntu 24.04 and check that systemd is working
-```bash
-systemctl list-unit-files --type=service
-```
-
-
-### Provision
+## Provision
 
 ```bash
 # Clone this repository
@@ -103,13 +62,10 @@ You need to edit Ansible variables before running the provision code, for exampl
 ```yaml
 ---
 ansible_playbook_python: '/home/undeb/ansible-venv/bin/python3'
+go_projects_path: '/home/undeb/lab/go'
 
 main_user: 'undeb'
 user_timezone: 'Europe/Paris'
-
-is_wsl: true
-
-go_projects_path: '/home/undeb/lab/go'
 ```
 
 After that, you are all set to provision your devkit
@@ -126,7 +82,7 @@ $ANSIBLE_BIN -i inventory.yml -t terraform -e "terraform_version=1.0.11 terragru
 ```
 
 
-### Additional configuration
+## Additional configuration
 
 Do not forget to source the bash scripts created by some roles
 ```bash
