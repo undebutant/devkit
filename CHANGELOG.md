@@ -3,6 +3,7 @@
 - Change `ansible_install.sh` script to autodetect the preinstalled version of python
 - Use ansible facts to support both debian and ubuntu, also removing the need for the codename variable
 - Use ansible facts and additional variables to handle both AMD64 and ARM64 architectures
+- Change ansible default result output to yaml format
 
 
 # v0.6.1
