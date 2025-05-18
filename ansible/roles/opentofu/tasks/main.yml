@@ -1,7 +1,7 @@
 ---
 - name: Check opentofu install
   stat:
-    path: '/usr/local/bin/tofu'
+    path: "/usr/local/bin/tofu"
   register: opentofu_bin
 
 - name: Check opentofu installed version
@@ -13,29 +13,29 @@
 
 - name: Create a temporary directory to extract opentofu archive
   file:
-    path: '/tmp/opentofu-linux-amd64'
+    path: "/tmp/opentofu-linux-{{ architecture_instructions }}"
     state: directory
-    mode: '0755'
+    mode: "0755"
   when: not opentofu_bin.stat.exists or opentofu_installed_version.stdout != opentofu_version
 
 - name: Extract opentofu archive
   unarchive:
-    src: "https://github.com/opentofu/opentofu/releases/download/v{{ opentofu_version }}/tofu_{{ opentofu_version }}_linux_amd64.zip"
+    src: "https://github.com/opentofu/opentofu/releases/download/v{{ opentofu_version }}/tofu_{{ opentofu_version }}_linux_{{ architecture_instructions }}.zip"
     remote_src: yes
-    dest: '/tmp/opentofu-linux-amd64/'
-    mode: '0755'
+    dest: "/tmp/opentofu-linux-{{ architecture_instructions }}/"
+    mode: "0755"
   when: not opentofu_bin.stat.exists or opentofu_installed_version.stdout != opentofu_version
 
 - name: Copy opentofu binary
   copy:
-    src: "/tmp/opentofu-linux-amd64/tofu"
+    src: "/tmp/opentofu-linux-{{ architecture_instructions }}/tofu"
     remote_src: yes
-    dest: '/usr/local/bin/tofu'
-    mode: '0755'
+    dest: "/usr/local/bin/tofu"
+    mode: "0755"
   when: not opentofu_bin.stat.exists or opentofu_installed_version.stdout != opentofu_version
 
 - name: Remove opentofu folder from /tmp
   file:
-    path: '/tmp/opentofu-linux-amd64'
+    path: "/tmp/opentofu-linux-{{ architecture_instructions }}"
     state: absent
   when: not opentofu_bin.stat.exists or opentofu_installed_version.stdout != opentofu_version

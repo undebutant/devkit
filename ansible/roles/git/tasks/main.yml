@@ -32,7 +32,7 @@
 
 - name: Add git-core PPA
   apt_repository:
-    repo: "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/git.gpg] https://ppa.launchpadcontent.net/git-core/ppa/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} main"
+    repo: "deb [arch={{ architecture_instructions }} signed-by=/etc/apt/trusted.gpg.d/git.gpg] https://ppa.launchpadcontent.net/git-core/ppa/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} main"
     state: present
     filename: git-core
     mode: '0644'
@@ -76,7 +76,7 @@
 
 - name: Add git-lfs apt-repository
   apt_repository:
-    repo: "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/git-lfs.gpg] https://packagecloud.io/github/git-lfs/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} main"
+    repo: "deb [arch={{ architecture_instructions }} signed-by=/etc/apt/trusted.gpg.d/git-lfs.gpg] https://packagecloud.io/github/git-lfs/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} main"
     state: present
     filename: git-lfs
     mode: '0644'

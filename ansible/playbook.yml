@@ -8,6 +8,18 @@
         file: "./vars.yml"
       tags:
         - always
+    - name: Configure architecture variables for amd64
+      ansible.builtin.set_fact:
+        architecture_instructions: "amd64"
+        architecture_bit: "64bit"
+      when:
+        - ansible_architecture == "x86_64"
+    - name: Configure architecture variables for arm64
+      ansible.builtin.set_fact:
+        architecture_instructions: "arm64"
+        architecture_bit: "64bit"
+      when:
+        - ansible_architecture == "aarch64"
 
   roles:
     - { role: basics, tags: ['basics'] }

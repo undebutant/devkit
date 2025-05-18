@@ -1,7 +1,7 @@
 ---
 - name: Check vault install
   stat:
-    path: '/usr/local/bin/vault'
+    path: "/usr/local/bin/vault"
   register: vault_bin
 
 - name: Check vault installed version
@@ -13,8 +13,8 @@
 
 - name: Unzip vault archive
   unarchive:
-    src: "https://releases.hashicorp.com/vault/{{ vault_version }}/vault_{{ vault_version }}_linux_amd64.zip"
+    src: "https://releases.hashicorp.com/vault/{{ vault_version }}/vault_{{ vault_version }}_linux_{{ architecture_instructions }}.zip"
     remote_src: yes
-    dest: '/usr/local/bin/'
-    mode: '0755'
+    dest: "/usr/local/bin/"
+    mode: "0755"
   when: not vault_bin.stat.exists or vault_installed_version.stdout != vault_version

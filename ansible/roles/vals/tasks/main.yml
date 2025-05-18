@@ -1,7 +1,7 @@
 ---
 - name: Check vals install
   stat:
-    path: '/usr/local/bin/vals'
+    path: "/usr/local/bin/vals"
   register: vals_bin
 
 - name: Check vals installed version
@@ -13,29 +13,29 @@
 
 - name: Create a temporary directory to extract vals archive
   file:
-    path: '/tmp/vals-linux-amd64'
+    path: "/tmp/vals-linux-{{ architecture_instructions }}"
     state: directory
-    mode: '0755'
+    mode: "0755"
   when: not vals_bin.stat.exists or vals_installed_version.stdout != vals_version
 
 - name: Extract vals archive
   unarchive:
-    src: "https://github.com/variantdev/vals/releases/download/v{{ vals_version }}/vals_{{ vals_version }}_linux_amd64.tar.gz"
+    src: "https://github.com/variantdev/vals/releases/download/v{{ vals_version }}/vals_{{ vals_version }}_linux_{{ architecture_instructions }}.tar.gz"
     remote_src: yes
-    dest: '/tmp/vals-linux-amd64/'
-    mode: '0755'
+    dest: "/tmp/vals-linux-{{ architecture_instructions }}/"
+    mode: "0755"
   when: not vals_bin.stat.exists or vals_installed_version.stdout != vals_version
 
 - name: Copy vals binary
   copy:
-    src: '/tmp/vals-linux-amd64/vals'
+    src: "/tmp/vals-linux-{{ architecture_instructions }}/vals"
     remote_src: yes
-    dest: '/usr/local/bin/vals'
-    mode: '0755'
+    dest: "/usr/local/bin/vals"
+    mode: "0755"
   when: not vals_bin.stat.exists or vals_installed_version.stdout != vals_version
 
 - name: Remove vals folder from /tmp
   file:
-    path: '/tmp/vals-linux-amd64'
+    path: "/tmp/vals-linux-{{ architecture_instructions }}"
     state: absent
   when: not vals_bin.stat.exists or vals_installed_version.stdout != vals_version

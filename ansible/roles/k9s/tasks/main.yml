@@ -1,7 +1,7 @@
 ---
 - name: Check k9s install
   stat:
-    path: '/usr/local/bin/k9s'
+    path: "/usr/local/bin/k9s"
   register: k9s_bin
 
 - name: Check k9s installed version
@@ -13,29 +13,29 @@
 
 - name: Create a temporary directory to extract k9s archive
   file:
-    path: '/tmp/k9s-linux-amd64'
+    path: "/tmp/k9s-linux-{{ architecture_instructions }}"
     state: directory
-    mode: '0755'
+    mode: "0755"
   when: not k9s_bin.stat.exists or k9s_installed_version.stdout != k9s_version
 
 - name: Extract k9s archive
   unarchive:
-    src: "https://github.com/derailed/k9s/releases/download/v{{ k9s_version }}/k9s_Linux_amd64.tar.gz"
+    src: "https://github.com/derailed/k9s/releases/download/v{{ k9s_version }}/k9s_Linux_{{ architecture_instructions }}.tar.gz"
     remote_src: yes
-    dest: '/tmp/k9s-linux-amd64/'
-    mode: '0755'
+    dest: "/tmp/k9s-linux-{{ architecture_instructions }}/"
+    mode: "0755"
   when: not k9s_bin.stat.exists or k9s_installed_version.stdout != k9s_version
 
 - name: Copy k9s binary
   copy:
-    src: "/tmp/k9s-linux-amd64/k9s"
+    src: "/tmp/k9s-linux-{{ architecture_instructions }}/k9s"
     remote_src: yes
-    dest: '/usr/local/bin/k9s'
-    mode: '0755'
+    dest: "/usr/local/bin/k9s"
+    mode: "0755"
   when: not k9s_bin.stat.exists or k9s_installed_version.stdout != k9s_version
 
 - name: Remove k9s folder from /tmp
   file:
-    path: '/tmp/k9s-linux-amd64'
+    path: "/tmp/k9s-linux-{{ architecture_instructions }}"
     state: absent
   when: not k9s_bin.stat.exists or k9s_installed_version.stdout != k9s_version

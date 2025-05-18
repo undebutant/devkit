@@ -1,9 +1,9 @@
 ---
-ansible_playbook_python: '<full_path_to_your_venv_with_ansible>'
+ansible_playbook_python: '/home/undeb/ansible-venv/bin/python3'
 
-main_user: '<your_username>'
-user_timezone: '<your_timezone>'
+main_user: 'undeb'
+user_timezone: 'Europe/Paris'
 
-is_wsl: true
+is_wsl: false
 
-go_projects_path: '<full_path_to_your_go_project_folder>'
+go_projects_path: '/home/undeb/lab/go'

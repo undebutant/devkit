@@ -1,7 +1,7 @@
 ---
 - name: Check kubectl install
   stat:
-    path: '/usr/local/bin/kubectl'
+    path: "/usr/local/bin/kubectl"
   register: kubectl_bin
 
 - name: Check kubectl installed version
@@ -13,8 +13,8 @@
 
 - name: Install kubectl
   get_url:
-    url: "https://dl.k8s.io/release/v{{ kubernetes_version }}/bin/linux/amd64/kubectl"
-    dest: '/usr/local/bin/kubectl'
-    mode: '0755'
+    url: "https://dl.k8s.io/release/v{{ kubernetes_version }}/bin/linux/{{ architecture_instructions }}/kubectl"
+    dest: "/usr/local/bin/kubectl"
+    mode: "0755"
     force: yes
   when: not kubectl_bin.stat.exists or (kubectl_installed_version.stdout != kubernetes_version)

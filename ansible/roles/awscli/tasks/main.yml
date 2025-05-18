@@ -23,7 +23,7 @@
 
 - name: Download and unzip awscli v2 installer archive
   unarchive:
-    src: "https://awscli.amazonaws.com/awscli-exe-linux-x86_64-{{ awscli_version }}.zip"
+    src: "https://awscli.amazonaws.com/awscli-exe-linux-{{ ansible_architecture }}-{{ awscli_version }}.zip"
     remote_src: yes
     dest: '/tmp'
     mode: '0755'
@@ -53,7 +53,7 @@
 
 - name: Download awscli ssm plugin
   get_url:
-    url: "https://s3.amazonaws.com/session-manager-downloads/plugin/{{ awscli_ssm_plugin_version }}/{{ ansible_distribution | lower }}_64bit/session-manager-plugin.deb"
+    url: "https://s3.amazonaws.com/session-manager-downloads/plugin/{{ awscli_ssm_plugin_version }}/{{ ansible_distribution | lower }}_{{ architecture_bit }}/session-manager-plugin.deb"
     dest: '/tmp/session-manager-plugin.deb'
     mode: '0755'
     force: yes

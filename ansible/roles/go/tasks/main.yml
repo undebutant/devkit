@@ -19,7 +19,7 @@
 
 - name: Untar go archive
   unarchive:
-    src: "https://go.dev/dl/go{{ go_version }}.linux-amd64.tar.gz"
+    src: "https://go.dev/dl/go{{ go_version }}.linux-{{ architecture_instructions }}.tar.gz"
     remote_src: yes
     dest: '/usr/local/'
     mode: '0755'

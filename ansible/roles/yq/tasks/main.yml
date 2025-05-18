@@ -1,7 +1,7 @@
 ---
 - name: Check yq install
   stat:
-    path: '/usr/local/bin/yq'
+    path: "/usr/local/bin/yq"
   register: yq_bin
 
 - name: Check yq installed version
@@ -13,8 +13,8 @@
 
 - name: Install yq
   get_url:
-    url: "https://github.com/mikefarah/yq/releases/download/v{{ yq_version }}/yq_linux_amd64"
-    dest: '/usr/local/bin/yq'
-    mode: '0755'
+    url: "https://github.com/mikefarah/yq/releases/download/v{{ yq_version }}/yq_linux_{{ architecture_instructions }}"
+    dest: "/usr/local/bin/yq"
+    mode: "0755"
     force: yes
   when: not yq_bin.stat.exists or yq_installed_version.stdout != yq_version

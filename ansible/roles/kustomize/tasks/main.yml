@@ -1,7 +1,7 @@
 ---
 - name: Check kustomize install
   stat:
-    path: '/usr/local/bin/kustomize'
+    path: "/usr/local/bin/kustomize"
   register: kustomize_bin
 
 - name: Check kustomize installed version
@@ -13,29 +13,29 @@
 
 - name: Create a temporary directory to extract kustomize archive
   file:
-    path: '/tmp/kustomize-linux-amd64'
+    path: "/tmp/kustomize-linux-{{ architecture_instructions }}"
     state: directory
-    mode: '0755'
+    mode: "0755"
   when: not kustomize_bin.stat.exists or kustomize_installed_version.stdout != kustomize_version
 
 - name: Extract kustomize archive
   unarchive:
-    src: "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize/v{{ kustomize_version }}/kustomize_v{{ kustomize_version }}_linux_amd64.tar.gz"
+    src: "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize/v{{ kustomize_version }}/kustomize_v{{ kustomize_version }}_linux_{{ architecture_instructions }}.tar.gz"
     remote_src: yes
-    dest: '/tmp/kustomize-linux-amd64/'
-    mode: '0755'
+    dest: "/tmp/kustomize-linux-{{ architecture_instructions }}/"
+    mode: "0755"
   when: not kustomize_bin.stat.exists or kustomize_installed_version.stdout != kustomize_version
 
 - name: Copy kustomize binary
   copy:
-    src: "/tmp/kustomize-linux-amd64/kustomize"
+    src: "/tmp/kustomize-linux-{{ architecture_instructions }}/kustomize"
     remote_src: yes
-    dest: '/usr/local/bin/kustomize'
-    mode: '0755'
+    dest: "/usr/local/bin/kustomize"
+    mode: "0755"
   when: not kustomize_bin.stat.exists or kustomize_installed_version.stdout != kustomize_version
 
 - name: Remove kustomize folder from /tmp
   file:
-    path: '/tmp/kustomize-linux-amd64'
+    path: "/tmp/kustomize-linux-{{ architecture_instructions }}"
     state: absent
   when: not kustomize_bin.stat.exists or kustomize_installed_version.stdout != kustomize_version
