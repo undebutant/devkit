@@ -5,6 +5,7 @@
 - Use ansible facts and additional variables to handle both AMD64 and ARM64 architectures
 - Change ansible default result output to yaml format
 - Remove WSL variable
+- Add `mtu` value in docker `daemon.json`
 
 
 # v0.6.1
