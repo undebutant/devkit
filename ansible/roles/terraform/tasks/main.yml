@@ -62,18 +62,18 @@
 
 - name: Create cache plugin folder for terraform
   file:
-    path: "/home/{{ ubuntu_user }}/.terraform.d/plugin-cache"
+    path: "/home/{{ main_user }}/.terraform.d/plugin-cache"
     state: directory
     mode: '0755'
     recurse: yes
-    owner: "{{ ubuntu_user }}"
-    group: "{{ ubuntu_user }}"
+    owner: "{{ main_user }}"
+    group: "{{ main_user }}"
 
 # Create a "provider plugin cache" => https://www.terraform.io/docs/commands/cli-config.html#provider-plugin-cache
 - name: Copy terraform CLI config file
   copy:
     src: '.terraformrc'
-    dest: "/home/{{ ubuntu_user }}/.terraformrc"
+    dest: "/home/{{ main_user }}/.terraformrc"
     mode: '0755'
-    owner: "{{ ubuntu_user }}"
-    group: "{{ ubuntu_user }}"
+    owner: "{{ main_user }}"
+    group: "{{ main_user }}"

@@ -38,8 +38,8 @@
     path: "{{ go_projects_path }}/src"
     state: directory
     mode: '0755'
-    owner: "{{ ubuntu_user }}"
-    group: "{{ ubuntu_user }}"
+    owner: "{{ main_user }}"
+    group: "{{ main_user }}"
 
 - name: Store go environment variables system-wide
   template:

@@ -1,6 +1,6 @@
 # devkit
 
-Script and Ansible roles to provision a convenient devkit on Ubuntu :)
+Script and Ansible roles to provision a convenient devkit on Debian / Ubuntu :)
 
 
 ## What's inside
@@ -30,7 +30,7 @@ Script and Ansible roles to provision a convenient devkit on Ubuntu :)
 | minikube             | `minikube_version`             | `1.35.0`                         |
 | opentofu             | `opentofu_version`             | `1.9.0`                          |
 | packer               | `packer_version`               | `1.12.0`                         |
-| python               | `n/a`                          | `3.12.x` (Ubuntu 24.04 default)  |
+| python               | `n/a`                          | `3.x.y` (OS default)             |
 | sops                 | `sops_version`                 | `3.9.4`                          |
 | terraform            | `terraform_version`            | `1.11.2`                         |
 | terraform-docs       | `terraform_docs_version`       | `0.19.0`                         |
@@ -45,7 +45,7 @@ Script and Ansible roles to provision a convenient devkit on Ubuntu :)
 
 ## Install and provision
 
-If you have Ubuntu 24.04 installed on your computer, just go to the [Provision](./README.md#provision) section.
+If you have Debian or Ubuntu as main OS on your computer, just go to the [Provision](./README.md#provision) section.
 
 
 ### Special requirements for WSL
@@ -104,10 +104,9 @@ You need to edit Ansible variables before running the provision code, for exampl
 ---
 ansible_playbook_python: '/home/undeb/ansible-venv/bin/python3'
 
-ubuntu_user: 'undeb'
+main_user: 'undeb'
 user_timezone: 'Europe/Paris'
 
-ubuntu_codename: 'noble'
 is_wsl: true
 
 go_projects_path: '/home/undeb/lab/go'

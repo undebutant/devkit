@@ -1,6 +1,7 @@
 ## Unreleased
 
-- Change `ansible_install.sh` script to autodetect the preinstalled version of Python
+- Change `ansible_install.sh` script to autodetect the preinstalled version of python
+- Use ansible facts to support both debian and ubuntu, also removing the need for the codename variable
 
 
 # v0.6.1

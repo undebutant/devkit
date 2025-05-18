@@ -85,7 +85,7 @@
 
 - name: Check helm diff plugin install
   stat:
-    path: '/home/{{ ubuntu_user }}/.local/share/helm/plugins/helm-diff'
+    path: '/home/{{ main_user }}/.local/share/helm/plugins/helm-diff'
   register: helm_diff_folder
 
 - name: Check helm diff plugin installed version

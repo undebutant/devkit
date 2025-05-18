@@ -21,9 +21,9 @@
 
 - name: Create cache plugin folder for packer
   file:
-    path: "/home/{{ ubuntu_user }}/.config/packer"
+    path: "/home/{{ main_user }}/.config/packer"
     state: directory
     mode: '0755'
     recurse: yes
-    owner: "{{ ubuntu_user }}"
-    group: "{{ ubuntu_user }}"
+    owner: "{{ main_user }}"
+    group: "{{ main_user }}"
