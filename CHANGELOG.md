@@ -1,6 +1,6 @@
 ## Unreleased
 
-- Nothing yet ;)
+- Change `ansible_install.sh` script to autodetect the preinstalled version of Python
 
 
 # v0.6.1

@@ -8,9 +8,13 @@ if [ "$#" -ne 1 ]; then
     exit 2
 fi
 
+# Find out installed Python version
+PYTHON_VERSION=$(python3 --version | sed -n 's/Python \(.*\)$/\1/p')
+PYTHON_VERSION_WITHOUT_PATCH=$(echo ${PYTHON_VERSION} | cut -d '.' -f 1,2)
+
 # Install the venv package as installing Python packages system-wide is not recommended
 sudo apt update
-sudo apt install -y python3.12-venv
+sudo apt install -y python${PYTHON_VERSION_WITHOUT_PATCH}-venv
 
 # Create a venv
 python3 -m venv $1
